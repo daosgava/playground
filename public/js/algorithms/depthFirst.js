@@ -27,6 +27,7 @@ const appendNodeToPage = (targetContainer, node) => {
 };
 
 const addSeparator = (nodeElem, node) => {
+  // Refactor to cover when there is only one child
   if (node.left || node.right) {
     const separator = createHtmlElem("div", ["separator"]);
     const vline = createHtmlElem("div", ["vline"]);
@@ -45,7 +46,7 @@ const drawNode = (node, htmlContainer) => {
 };
 
 // Based on Depth-First
-export const depthFirst = (node, htmlContainer, level = 0) => {
+export const drawDF = (node, htmlContainer, level = 0) => {
   if (!node?.value) return false;
 
   node.level = level;
@@ -54,7 +55,8 @@ export const depthFirst = (node, htmlContainer, level = 0) => {
   const nodeElem = drawNode(node, htmlContainer);
 
   return (
-    depthFirst(node.left, nodeElem, nextLevel) ||
-    depthFirst(node.right, nodeElem, nextLevel)
+    // Refactor to cover when there is only one child
+    drawDF(node.left, nodeElem, nextLevel) ||
+    drawDF(node.right, nodeElem, nextLevel)
   );
 };

@@ -1,5 +1,5 @@
 import { TreeNode } from "./structures/tree.js";
-import { depthFirst } from "./algorithms/depthFirst.js";
+import { drawDF } from "./algorithms/depthFirst.js";
 
 const initializeTree = () => {
   const root = new TreeNode(1);
@@ -18,7 +18,7 @@ const initializeTree = () => {
   root.right.right.right.right = new TreeNode(13);
 
   const rootContainer = document.querySelector("#tree");
-  depthFirst(root, rootContainer);
+  drawDF(root, rootContainer);
 };
 
 initializeTree();
