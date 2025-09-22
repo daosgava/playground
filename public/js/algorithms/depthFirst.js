@@ -44,7 +44,7 @@ const drawNode = (node, htmlContainer) => {
   return nodeElem;
 };
 
-// Depth-First
+// Based on Depth-First
 export const depthFirst = (node, htmlContainer, level = 0) => {
   if (!node?.value) return false;
 
