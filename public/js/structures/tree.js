@@ -21,7 +21,7 @@ export class HTMLTree {
   #deleteNode(node) {
     node.value = undefined;
     this.#clearRootContainer();
-    this.drawDF(this.container, this.root);
+    this.drawTree(this.container, this.root);
   }
 
   #addDeleteHandler(elem, node) {
