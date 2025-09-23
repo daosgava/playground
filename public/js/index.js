@@ -3,7 +3,7 @@ import { TreeNode, HTMLTree } from "./structures/Tree.js";
 const initializeTree = () => {
   const root = new TreeNode(1);
 
-  // Adjacency list
+  // Tree Nodes
   root.left = new TreeNode(2);
   root.right = new TreeNode(3);
   root.left.left = new TreeNode(4);
