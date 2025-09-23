@@ -22,7 +22,7 @@ const initializeTree = () => {
   const rootContainer = document.querySelector("#tree");
 
   const htmlTree = new HTMLTree(rootContainer, root);
-  htmlTree.drawDF();
+  htmlTree.drawTree();
 };
 
 initializeTree();

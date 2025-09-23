@@ -14,23 +14,23 @@ export class HTMLTree {
     this.root = root;
   }
 
-  clearRootContainer() {
+  #clearRootContainer() {
     this.rootContainer.replaceChildren();
   }
 
-  deleteNode(node) {
+  #deleteNode(node) {
     node.value = undefined;
-    this.clearRootContainer();
+    this.#clearRootContainer();
     this.drawDF(this.container, this.root);
   }
 
-  addDeleteHandler(elem, node) {
+  #addDeleteHandler(elem, node) {
     elem.addEventListener("click", () => {
-      this.deleteNode(node);
+      this.#deleteNode(node);
     });
   }
 
-  createNodeContainer(node) {
+  #createNodeContainer(node) {
     const nodeElem = createHtmlElem({
       tag: "div",
       classes: ["node"],
@@ -40,7 +40,7 @@ export class HTMLTree {
       classes: ["value"],
       innerText: node.value,
     });
-    this.addDeleteHandler(valueElem, node);
+    this.#addDeleteHandler(valueElem, node);
 
     const valueContainerElem = createHtmlElem({
       tag: "div",
@@ -53,15 +53,15 @@ export class HTMLTree {
     return nodeElem;
   }
 
-  appendNodeToPage(node, targetContainer) {
-    const nodeElem = this.createNodeContainer(node);
+  #appendNodeToPage(node, targetContainer) {
+    const nodeElem = this.#createNodeContainer(node);
     targetContainer.appendChild(nodeElem);
     targetContainer.classList.add("parent");
 
     return nodeElem;
   }
 
-  addVerticalLine(separator, node) {
+  #addVerticalLine(separator, node) {
     const hasLeft = node.left && node.left?.value;
     const hasRight = node.right && node.right?.value;
 
@@ -71,7 +71,7 @@ export class HTMLTree {
     }
   }
 
-  addHorizontalLine(separator, node) {
+  #addHorizontalLine(separator, node) {
     const hasLeft = node.left && node.left?.value;
     const hasRight = node.right && node.right?.value;
 
@@ -81,34 +81,34 @@ export class HTMLTree {
     }
   }
 
-  addSeparator(nodeElem, node) {
+  #addSeparator(nodeElem, node) {
     const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
 
-    this.addVerticalLine(separator, node);
-    this.addHorizontalLine(separator, node);
+    this.#addVerticalLine(separator, node);
+    this.#addHorizontalLine(separator, node);
 
     nodeElem.appendChild(separator);
   }
 
-  drawNode(node, htmlContainer) {
-    const nodeElem = this.appendNodeToPage(node, htmlContainer);
-    this.addSeparator(nodeElem, node);
+  #drawNode(node, htmlContainer) {
+    const nodeElem = this.#appendNodeToPage(node, htmlContainer);
+    this.#addSeparator(nodeElem, node);
 
     return nodeElem;
   }
 
   // Based on Depth-First
-  drawDF(container, node, isChild) {
+  drawTree(container, node, isChild) {
     const currentNode = isChild ? node : this.root;
     const currentContainer = isChild ? container : this.rootContainer;
 
     if (!currentNode?.value) return;
 
-    const nodeElem = this.drawNode(currentNode, currentContainer);
+    const nodeElem = this.#drawNode(currentNode, currentContainer);
 
     return (
-      this.drawDF(nodeElem, currentNode.left, true) ||
-      this.drawDF(nodeElem, currentNode.right, true)
+      this.drawTree(nodeElem, currentNode.left, true) ||
+      this.drawTree(nodeElem, currentNode.right, true)
     );
   }
 }
