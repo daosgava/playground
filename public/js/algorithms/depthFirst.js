@@ -27,15 +27,19 @@ const appendNodeToPage = (targetContainer, node) => {
 };
 
 const addSeparator = (nodeElem, node) => {
-  // Refactor to cover when there is only one child
+  const separator = createHtmlElem("div", ["separator"]);
+
   if (node.left || node.right) {
-    const separator = createHtmlElem("div", ["separator"]);
     const vline = createHtmlElem("div", ["vline"]);
-    const hline = createHtmlElem("div", ["hline"]);
     separator.appendChild(vline);
-    separator.appendChild(hline);
-    nodeElem.appendChild(separator);
   }
+
+  if (node.left && node.right) {
+    const hline = createHtmlElem("div", ["hline"]);
+    separator.appendChild(hline);
+  }
+
+  nodeElem.appendChild(separator);
 };
 
 const drawNode = (node, htmlContainer) => {
@@ -59,7 +63,6 @@ export const drawDF = (node, htmlContainer, level = 0) => {
   const nodeElem = drawNode(node, htmlContainer);
 
   return (
-    // Refactor to cover when there is only one child
     drawDF(node.left, nodeElem, nextLevel) ||
     drawDF(node.right, nodeElem, nextLevel)
   );
