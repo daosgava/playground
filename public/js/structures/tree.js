@@ -61,22 +61,31 @@ export class HTMLTree {
     return nodeElem;
   }
 
-  addSeparator(nodeElem, node) {
-    const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
+  addVerticalLine(separator, node) {
+    const hasLeft = node.left && node.left?.value;
+    const hasRight = node.right && node.right?.value;
 
-    // Improve conditionals
-    const hasAChild = node.left || node.right;
-    if (hasAChild) {
+    if (hasLeft || hasRight) {
       const vline = createHtmlElem({ tag: "div", classes: ["vline"] });
       separator.appendChild(vline);
     }
+  }
 
-    const hasBothChildren =
-      node.left && node.right && node.left.value && node.right.value;
-    if (hasBothChildren) {
+  addHorizontalLine(separator, node) {
+    const hasLeft = node.left && node.left?.value;
+    const hasRight = node.right && node.right?.value;
+
+    if (hasLeft && hasRight) {
       const hline = createHtmlElem({ tag: "div", classes: ["hline"] });
       separator.appendChild(hline);
     }
+  }
+
+  addSeparator(nodeElem, node) {
+    const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
+
+    this.addVerticalLine(separator, node);
+    this.addHorizontalLine(separator, node);
 
     nodeElem.appendChild(separator);
   }
