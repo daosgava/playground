@@ -1,9 +1,9 @@
-import { TreeNode } from "./structures/tree.js";
-import { drawDF } from "./algorithms/depthFirst.js";
+import { TreeNode, HTMLTree } from "./structures/Tree.js";
 
 const initializeTree = () => {
   const root = new TreeNode(1);
 
+  // Adjacency list
   root.left = new TreeNode(2);
   root.right = new TreeNode(3);
   root.left.left = new TreeNode(4);
@@ -20,7 +20,9 @@ const initializeTree = () => {
   root.right.right.right.left.right = new TreeNode(15);
 
   const rootContainer = document.querySelector("#tree");
-  drawDF(root, rootContainer);
+
+  const htmlTree = new HTMLTree(rootContainer, root);
+  htmlTree.drawDF();
 };
 
 initializeTree();
