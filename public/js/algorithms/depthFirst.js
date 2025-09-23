@@ -45,13 +45,17 @@ const drawNode = (node, htmlContainer) => {
   return nodeElem;
 };
 
+const assignLevel = (node, level) => {
+  node.level = level;
+
+  return level + 1;
+};
+
 // Based on Depth-First
 export const drawDF = (node, htmlContainer, level = 0) => {
   if (!node?.value) return false;
 
-  node.level = level;
-  const nextLevel = level + 1;
-
+  const nextLevel = assignLevel(node, level);
   const nodeElem = drawNode(node, htmlContainer);
 
   return (
