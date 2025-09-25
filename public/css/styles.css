@@ -30,9 +30,9 @@
     border: var(--dark-border);
     border-radius: 2rem;
     display: flex;
-    height: 2rem;
-    justify-content: center;
     cursor: pointer;
+    height: 2rem;
+    text-align: center;
     width: 2rem;
 }
 

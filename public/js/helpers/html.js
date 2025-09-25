@@ -12,3 +12,11 @@ export const createHtmlElem = ({ tag, classes, id, innerText }) => {
 
   return elem;
 };
+
+export const createInputElem = ({ classes, id, value }) => {
+  const inputElem = createHtmlElem({ tag: "input", classes, id });
+
+  inputElem.value = value;
+
+  return inputElem;
+};

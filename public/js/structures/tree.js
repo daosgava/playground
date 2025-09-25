@@ -1,4 +1,4 @@
-import { createHtmlElem } from "../helpers/html.js";
+import { createHtmlElem, createInputElem } from "../helpers/html.js";
 
 export class TreeNode {
   constructor(value) {
@@ -24,9 +24,18 @@ export class HTMLTree {
     this.drawTree(this.container, this.root);
   }
 
-  #addDeleteHandler(elem, node) {
-    elem.addEventListener("click", () => {
-      this.#deleteNode(node);
+  #addNode(node, newVal) {
+    node.value = newVal;
+    this.#clearRootContainer();
+    this.drawTree(this.container, this.root);
+  }
+
+  #addHandlers(elem, node) {
+    elem.addEventListener("keyup", (event) => {
+      const keyCode = event.keyCode;
+      if (keyCode === 13) {
+        this.#addNode(node, elem.value);
+      }
     });
   }
 
@@ -35,12 +44,12 @@ export class HTMLTree {
       tag: "div",
       classes: ["node"],
     });
-    const valueElem = createHtmlElem({
-      tag: "div",
+    const valueElem = createInputElem({
+      id: `node-${node.value}`,
       classes: ["value"],
-      innerText: node.value,
+      value: node.value,
     });
-    this.#addDeleteHandler(valueElem, node);
+    this.#addHandlers(valueElem, node);
 
     const valueContainerElem = createHtmlElem({
       tag: "div",
