@@ -1,7 +1,9 @@
-/* TODO: Create variables and add breakpoints */
+:root {
+    --dark-border: 0.2rem solid darkslategrey;
+}
 
 #tree {
-    border: 0.2rem solid darkslategrey;
+    border: var(--dark-border);
     border-radius: 2rem;
     padding: 1rem;
     min-height: 24rem;
@@ -25,7 +27,7 @@
 .value {
     align-items: center;
     background-color: aquamarine;
-    border: 0.2rem solid darkslategrey;
+    border: var(--dark-border);
     border-radius: 2rem;
     display: flex;
     height: 2rem;
@@ -50,6 +52,6 @@
 .hline {
     width: 50%;
     height: 1rem;
-    border: 0.2rem solid darkslategrey;
+    border: var(--dark-border);
     border-bottom: none;
 }

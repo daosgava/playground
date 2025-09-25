@@ -61,7 +61,9 @@ export class HTMLTree {
     return nodeElem;
   }
 
-  #addVerticalLine(separator, node) {
+  #addJoinLine(nodeElem, node) {
+    const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
+
     const hasLeft = node.left && node.left?.value;
     const hasRight = node.right && node.right?.value;
 
@@ -69,30 +71,18 @@ export class HTMLTree {
       const vline = createHtmlElem({ tag: "div", classes: ["vline"] });
       separator.appendChild(vline);
     }
-  }
-
-  #addHorizontalLine(separator, node) {
-    const hasLeft = node.left && node.left?.value;
-    const hasRight = node.right && node.right?.value;
 
     if (hasLeft && hasRight) {
       const hline = createHtmlElem({ tag: "div", classes: ["hline"] });
       separator.appendChild(hline);
     }
-  }
-
-  #addSeparator(nodeElem, node) {
-    const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
-
-    this.#addVerticalLine(separator, node);
-    this.#addHorizontalLine(separator, node);
 
     nodeElem.appendChild(separator);
   }
 
   #drawNode(node, htmlContainer) {
     const nodeElem = this.#appendNodeToPage(node, htmlContainer);
-    this.#addSeparator(nodeElem, node);
+    this.#addJoinLine(nodeElem, node);
 
     return nodeElem;
   }
