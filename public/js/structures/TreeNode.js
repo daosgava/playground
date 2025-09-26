@@ -24,6 +24,7 @@ export class HTMLTree {
 
   #clearRootContainer() {
     this.rootContainer.replaceChildren();
+    this.rootContainer.appendChild(this.nodeMenu.elem);
   }
 
   #deleteNode(node) {
