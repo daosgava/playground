@@ -33,13 +33,13 @@ input.value {
     width: 2rem;
 
     &:hover {
-        border-color: lightseagreen;
-        outline-color: lightseagreen;
+        border-color: var(--light-color);
+        outline-color: var(--light-color);
     }
 
     &:focus {
-        border-color: lightseagreen;
-        outline-color: lightseagreen;
+        border-color: var(--light-color);
+        outline-color: var(--light-color);
     }
 
     &:focus-visible {
