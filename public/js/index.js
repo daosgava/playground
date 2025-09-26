@@ -1,4 +1,4 @@
-import { TreeNode, HTMLTree } from "./structures/Tree.js";
+import { TreeNode, HTMLTree } from "./structures/TreeNode.js";
 
 const initializeTree = () => {
   const root = new TreeNode(1);

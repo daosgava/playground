@@ -1,0 +1,14 @@
+.node-menu {
+    display: flex;
+    gap: 1rem;
+    transform: translate(-40%, 140%);
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.2s ease-in;
+    z-index: 100;
+
+    & > div {
+        border-bottom: var(--dark-border);
+        cursor: pointer;
+    }
+}

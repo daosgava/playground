@@ -1,4 +1,5 @@
-import { createHtmlElem, createInputElem } from "../helpers/html.js";
+import { createHtmlElem, createInputElem } from "../helpers/elementFactory.js";
+import { NodeMenu } from "./NodeMenu.js";
 
 export class TreeNode {
   constructor(value) {
@@ -12,6 +13,13 @@ export class HTMLTree {
   constructor(rootContainer, root) {
     this.rootContainer = rootContainer;
     this.root = root;
+    this.nodeMenu = new NodeMenu();
+    this.rootContainer.appendChild(this.nodeMenu.elem);
+    this.timersId = [];
+  }
+
+  #cleanTimers() {
+    this.timersId.forEach((id) => clearTimeout(id));
   }
 
   #clearRootContainer() {
@@ -39,6 +47,33 @@ export class HTMLTree {
     });
   }
 
+  #addMenu(elem) {
+    elem.addEventListener("mouseenter", () => {
+      this.#cleanTimers();
+      const { left, top } = elem.getBoundingClientRect();
+
+      this.nodeMenu.setY(top);
+      this.nodeMenu.setX(left);
+      this.nodeMenu.show();
+    });
+
+    elem.addEventListener("mouseleave", () => {
+      const timerId = setTimeout(() => {
+        this.nodeMenu.hide();
+      }, 1000);
+
+      this.timersId.push(timerId);
+    });
+
+    this.nodeMenu.setMouseEnter(() => {
+      this.#cleanTimers();
+    });
+
+    this.nodeMenu.setMouseLeave(() => {
+      this.nodeMenu.hide();
+    });
+  }
+
   #createNodeContainer(node) {
     const nodeElem = createHtmlElem({
       tag: "div",
@@ -50,6 +85,7 @@ export class HTMLTree {
       value: node.value,
     });
     this.#addHandlers(valueElem, node);
+    this.#addMenu(valueElem);
 
     const valueContainerElem = createHtmlElem({
       tag: "div",

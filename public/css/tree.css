@@ -1,0 +1,68 @@
+#tree {
+    border: var(--dark-border);
+    border-radius: 2rem;
+    position: relative;
+    padding: 1rem;
+    min-height: 24rem;
+}
+
+.node {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: fit-content;
+    flex: 1;
+}
+
+.value-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+input.value {
+    align-items: center;
+    background-color: aquamarine;
+    border: var(--dark-border);
+    border-radius: 2rem;
+    display: flex;
+    cursor: pointer;
+    height: 2rem;
+    text-align: center;
+    width: 2rem;
+
+    &:hover {
+        border-color: lightseagreen;
+        outline-color: lightseagreen;
+    }
+
+    &:focus {
+        border-color: lightseagreen;
+        outline-color: lightseagreen;
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+.separator {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vline {
+    width: 0.2rem;
+    height: 0.4rem;
+    background-color: darkslategrey;
+}
+
+.hline {
+    width: 50%;
+    height: 1rem;
+    border: var(--dark-border);
+    border-bottom: none;
+}

@@ -20,3 +20,17 @@ export const createInputElem = ({ classes, id, value }) => {
 
   return inputElem;
 };
+
+export const createNodeMenuElem = () => {
+  const containerElem = createHtmlElem({ tag: "div", classes: ["node-menu"] });
+  const leftElem = createHtmlElem({ tag: "div", classes: ["add-left"] });
+  const rightElem = createHtmlElem({ tag: "div", classes: ["add-right"] });
+
+  leftElem.innerText = "Add Left";
+  rightElem.innerText = "Add Right";
+
+  containerElem.appendChild(leftElem);
+  containerElem.appendChild(rightElem);
+
+  return containerElem;
+};
