@@ -1,3 +1,5 @@
+import { LETT_BUTTON, RIGHT_BUTTON } from "../constants/menu.js";
+
 export const createHtmlElem = ({ tag, classes, id, innerText }) => {
   const elem = document.createElement(tag);
   classes.forEach((cssClass) => elem.classList.add(cssClass));
@@ -42,11 +44,22 @@ export const createNodeMenuElem = () => {
   const leftElem = createHtmlElem({ tag: "div", classes: ["add-left"] });
   const rightElem = createHtmlElem({ tag: "div", classes: ["add-right"] });
 
-  leftElem.innerText = "Add Left";
-  rightElem.innerText = "Add Right";
+  leftElem.innerText = LETT_BUTTON;
+  rightElem.innerText = RIGHT_BUTTON;
 
   containerElem.appendChild(leftElem);
   containerElem.appendChild(rightElem);
 
   return containerElem;
+};
+
+export const createSeparatorElem = () => {
+  const separatorContainer = createHtmlElem({
+    tag: "div",
+    classes: ["separator"],
+  });
+  const vline = createHtmlElem({ tag: "div", classes: ["vline"] });
+  const hline = createHtmlElem({ tag: "div", classes: ["hline"] });
+
+  return { separatorContainer, vline, hline };
 };

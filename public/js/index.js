@@ -1,4 +1,5 @@
-import { TreeNode, HTMLTree } from "./structures/TreeNode.js";
+import { TreeNode } from "./structures/TreeNode.js";
+import { Tree } from "./html/Tree.js";
 
 const initializeTree = () => {
   const root = new TreeNode(1);
@@ -21,7 +22,7 @@ const initializeTree = () => {
 
   const rootContainer = document.querySelector("#tree");
 
-  const htmlTree = new HTMLTree(rootContainer, root);
+  const htmlTree = new Tree(rootContainer, root);
   htmlTree.drawTree();
 };
 
