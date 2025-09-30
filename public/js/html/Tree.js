@@ -16,17 +16,17 @@ export class Tree {
   }
 
   #addJoinLine(nodeElem, node) {
-    const { separatorContainer, vline, hline } = createSeparatorElem();
+    const { separator, vline, hline } = createSeparatorElem();
 
     const hasLeft = node.left && node.left?.value;
     const hasRight = node.right && node.right?.value;
 
     if (hasLeft || hasRight) {
-      separatorContainer.appendChild(vline);
+      separator.appendChild(vline);
     }
 
     if (hasLeft && hasRight) {
-      separatorContainer.appendChild(hline);
+      separator.appendChild(hline);
     }
 
     nodeElem.appendChild(separator);

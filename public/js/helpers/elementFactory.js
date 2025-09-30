@@ -54,12 +54,9 @@ export const createNodeMenuElem = () => {
 };
 
 export const createSeparatorElem = () => {
-  const separatorContainer = createHtmlElem({
-    tag: "div",
-    classes: ["separator"],
-  });
+  const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
   const vline = createHtmlElem({ tag: "div", classes: ["vline"] });
   const hline = createHtmlElem({ tag: "div", classes: ["hline"] });
 
-  return { separatorContainer, vline, hline };
+  return { separator, vline, hline };
 };
