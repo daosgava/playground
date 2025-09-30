@@ -6,22 +6,16 @@
     min-height: 24rem;
 }
 
-.node {
+.node-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     height: fit-content;
     flex: 1;
 }
 
-.value-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-input.value {
+input.node {
     align-items: center;
     background-color: aquamarine;
     border: var(--dark-border);

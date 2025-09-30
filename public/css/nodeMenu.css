@@ -8,11 +8,12 @@
     z-index: 100;
 
     & > div {
-        border-bottom: var(--dark-border);
+        transition: all 0.2s ease-in;
         cursor: pointer;
+        color: var(--dark-color);
 
         &:hover {
-            border-color: var(--light-color);
+            color: var(--light-color);
         }
     }
 }

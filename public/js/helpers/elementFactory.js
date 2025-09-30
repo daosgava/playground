@@ -21,6 +21,22 @@ export const createInputElem = ({ classes, id, value }) => {
   return inputElem;
 };
 
+export const createNodeElem = (node) => {
+  const nodeElem = createInputElem({
+    id: `node-${node.value}`,
+    classes: ["node"],
+    value: node.value,
+  });
+  const nodeContainerElem = createHtmlElem({
+    tag: "div",
+    classes: ["node-container"],
+  });
+
+  nodeContainerElem.appendChild(nodeElem);
+
+  return { nodeElem, nodeContainerElem };
+};
+
 export const createNodeMenuElem = () => {
   const containerElem = createHtmlElem({ tag: "div", classes: ["node-menu"] });
   const leftElem = createHtmlElem({ tag: "div", classes: ["add-left"] });

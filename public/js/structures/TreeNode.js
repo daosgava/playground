@@ -1,4 +1,4 @@
-import { createHtmlElem, createInputElem } from "../helpers/elementFactory.js";
+import { createHtmlElem, createNodeElem } from "../helpers/elementFactory.js";
 import { NodeMenu } from "./NodeMenu.js";
 
 export class TreeNode {
@@ -9,56 +9,47 @@ export class TreeNode {
   }
 }
 
-export class HTMLTree {
-  constructor(rootContainer, root) {
-    this.rootContainer = rootContainer;
-    this.root = root;
-    this.nodeMenu = new NodeMenu();
-    this.rootContainer.appendChild(this.nodeMenu.elem);
+export class HTMLNode {
+  constructor(node, nodeMenu) {
+    this.node = node;
+    this.nodeMenu = nodeMenu;
+    this.html = undefined;
     this.timersId = [];
+    this.#createNode();
+  }
+
+  #createNode() {
+    this.html = createNodeElem(this.node);
+
+    this.#addHandlers();
+    this.#attachMenu();
+  }
+
+  #addHandlers() {
+    this.#editHandler();
+    // TODO - Add more handlers
+  }
+
+  getElements() {
+    return this.html;
   }
 
   #cleanTimers() {
     this.timersId.forEach((id) => clearTimeout(id));
   }
 
-  #clearRootContainer() {
-    this.rootContainer.replaceChildren();
-    this.rootContainer.appendChild(this.nodeMenu.elem);
-  }
-
-  #deleteNode(node) {
-    node.value = undefined;
-    this.#clearRootContainer();
-    this.drawTree(this.container, this.root);
-  }
-
-  #addNode(node, newVal) {
-    node.value = newVal;
-    this.#clearRootContainer();
-    this.drawTree(this.container, this.root);
-  }
-
-  #addHandlers(elem, node) {
-    elem.addEventListener("keyup", (event) => {
-      const keyCode = event.keyCode;
-      if (keyCode === 13) {
-        this.#addNode(node, elem.value);
-      }
-    });
-  }
-
-  #addMenu(elem) {
-    elem.addEventListener("mouseenter", () => {
+  #attachMenu() {
+    const { nodeElem } = this.getElements();
+    nodeElem.addEventListener("mouseenter", () => {
       this.#cleanTimers();
-      const { left, top } = elem.getBoundingClientRect();
+      const { left, top } = nodeElem.getBoundingClientRect();
 
       this.nodeMenu.setY(top);
       this.nodeMenu.setX(left);
       this.nodeMenu.show();
     });
 
-    elem.addEventListener("mouseleave", () => {
+    nodeElem.addEventListener("mouseleave", () => {
       const timerId = setTimeout(() => {
         this.nodeMenu.hide();
       }, 1000);
@@ -75,36 +66,33 @@ export class HTMLTree {
     });
   }
 
-  #createNodeContainer(node) {
-    const nodeElem = createHtmlElem({
-      tag: "div",
-      classes: ["node"],
+  #editHandler() {
+    const { nodeElem } = this.getElements();
+    nodeElem.addEventListener("keyup", (event) => {
+      const keyCode = event.keyCode;
+      if (keyCode === 13) {
+        this.#editNode(nodeElem.value);
+        nodeElem.blur();
+      }
     });
-    const valueElem = createInputElem({
-      id: `node-${node.value}`,
-      classes: ["value"],
-      value: node.value,
-    });
-    this.#addHandlers(valueElem, node);
-    this.#addMenu(valueElem);
-
-    const valueContainerElem = createHtmlElem({
-      tag: "div",
-      classes: ["value-container"],
-    });
-
-    valueContainerElem.appendChild(valueElem);
-    nodeElem.appendChild(valueContainerElem);
-
-    return nodeElem;
   }
 
-  #appendNodeToPage(node, targetContainer) {
-    const nodeElem = this.#createNodeContainer(node);
-    targetContainer.appendChild(nodeElem);
-    targetContainer.classList.add("parent");
+  #editNode(newVal) {
+    this.node.value = newVal;
+  }
+}
 
-    return nodeElem;
+export class HTMLTree {
+  constructor(rootContainer, root) {
+    this.rootContainer = rootContainer;
+    this.root = root;
+    this.nodeMenu = new NodeMenu();
+    this.rootContainer.appendChild(this.nodeMenu.elem);
+  }
+
+  #resetRootContainer() {
+    this.rootContainer.replaceChildren();
+    this.rootContainer.appendChild(this.nodeMenu.elem);
   }
 
   #addJoinLine(nodeElem, node) {
@@ -126,11 +114,9 @@ export class HTMLTree {
     nodeElem.appendChild(separator);
   }
 
-  #drawNode(node, htmlContainer) {
-    const nodeElem = this.#appendNodeToPage(node, htmlContainer);
-    this.#addJoinLine(nodeElem, node);
-
-    return nodeElem;
+  #appendElem(nodeContainerElem, htmlContainer) {
+    htmlContainer.appendChild(nodeContainerElem);
+    htmlContainer.classList.add("parent");
   }
 
   // Based on Depth-First
@@ -140,11 +126,15 @@ export class HTMLTree {
 
     if (!currentNode?.value) return;
 
-    const nodeElem = this.#drawNode(currentNode, currentContainer);
+    const htmlNode = new HTMLNode(currentNode, this.nodeMenu);
+    const { nodeContainerElem } = htmlNode.getElements();
+
+    this.#appendElem(nodeContainerElem, currentContainer);
+    this.#addJoinLine(nodeContainerElem, currentNode);
 
     return (
-      this.drawTree(nodeElem, currentNode.left, true) ||
-      this.drawTree(nodeElem, currentNode.right, true)
+      this.drawTree(nodeContainerElem, currentNode.left, true) ||
+      this.drawTree(nodeContainerElem, currentNode.right, true)
     );
   }
 }
