@@ -33,17 +33,17 @@ export class Node {
     const { nodeElem } = this.getElements();
 
     nodeElem.addEventListener(MOUSE_ENTER, () => {
-      const { bottom, right } = nodeElem.getBoundingClientRect();
+      const { top, left } = nodeElem.getBoundingClientRect();
 
       this.nodeMenu.selectedNode = this.node;
-      this.nodeMenu.setY(bottom);
-      this.nodeMenu.setX(right);
+      this.nodeMenu.setY(top);
+      this.nodeMenu.setX(left);
       this.nodeMenu.show();
     });
 
-    nodeElem.addEventListener(MOUSE_LEAVE, () => {
-      this.nodeMenu.hide();
-    });
+    // nodeElem.addEventListener(MOUSE_LEAVE, () => {
+    //   this.nodeMenu.hide();
+    // });
   }
 
   #editHandler() {

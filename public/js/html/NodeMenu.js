@@ -51,10 +51,10 @@ export class NodeMenu {
 
   setMouseLeave(cb) {
     const { menuElem } = this.getElements();
-    menuElem.addEventListener(MOUSE_LEAVE, () => {
-      this.hide();
-      cb?.();
-    });
+    // menuElem.addEventListener(MOUSE_LEAVE, () => {
+    //   this.hide();
+    //   cb?.();
+    // });
   }
 
   setClickDelete(cb) {
