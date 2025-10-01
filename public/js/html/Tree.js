@@ -6,13 +6,22 @@ export class Tree {
   constructor(rootContainer, root) {
     this.rootContainer = rootContainer;
     this.root = root;
+    this.#initMenu();
+  }
+
+  #initMenu() {
     this.nodeMenu = new NodeMenu();
-    this.rootContainer.appendChild(this.nodeMenu.elem);
+    this.nodeMenu.setClickDelete(() => {
+      this.#resetRootContainer();
+      this.drawTree();
+    });
+    const { menuElem } = this.nodeMenu.getElements();
+    this.rootContainer.appendChild(menuElem);
   }
 
   #resetRootContainer() {
     this.rootContainer.replaceChildren();
-    this.rootContainer.appendChild(this.nodeMenu.elem);
+    this.#initMenu();
   }
 
   #addJoinLine(nodeElem, node) {
@@ -45,6 +54,7 @@ export class Tree {
     if (!currentNode?.value) return;
 
     const htmlNode = new Node(currentNode, this.nodeMenu);
+
     const { nodeContainerElem } = htmlNode.getElements();
 
     this.#appendElem(nodeContainerElem, currentContainer);

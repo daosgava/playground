@@ -1,2 +1,3 @@
-export const LETT_BUTTON = "Add Left";
-export const RIGHT_BUTTON = "Add Right";
+export const LETT_BUTTON = "⊕";
+export const RIGHT_BUTTON = "⊕";
+export const DELETE_BUTTON = "⊖";

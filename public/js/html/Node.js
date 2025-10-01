@@ -1,11 +1,17 @@
 import { createNodeElem } from "../helpers/elementFactory.js";
+import {
+  MOUSE_ENTER,
+  MOUSE_LEAVE,
+  KEY_UP,
+  ENTER_KEY,
+} from "../constants/events.js";
 
 export class Node {
-  constructor(node, nodeMenu) {
+  constructor(node, nodeMenu, eventCallbacks) {
     this.node = node;
     this.nodeMenu = nodeMenu;
+    this.eventCallbacks = eventCallbacks;
     this.html = undefined;
-    this.timersId = [];
     this.#createNode();
   }
 
@@ -24,45 +30,30 @@ export class Node {
     this.#editHandler();
   }
 
-  #clearTimers() {
-    this.timersId.forEach((id) => clearTimeout(id));
-  }
-
   #attachMenu() {
     const { nodeElem } = this.getElements();
 
-    nodeElem.addEventListener("mouseenter", () => {
-      this.#clearTimers();
-      const { left, top } = nodeElem.getBoundingClientRect();
+    nodeElem.addEventListener(MOUSE_ENTER, () => {
+      const { bottom, right } = nodeElem.getBoundingClientRect();
 
-      this.nodeMenu.setY(top);
-      this.nodeMenu.setX(left);
+      this.nodeMenu.selectedNode = this.node;
+      this.nodeMenu.setY(bottom);
+      this.nodeMenu.setX(right);
       this.nodeMenu.show();
     });
 
-    nodeElem.addEventListener("mouseleave", () => {
-      const timerId = setTimeout(() => {
-        this.nodeMenu.hide();
-      }, 1000);
-
-      this.timersId.push(timerId);
-    });
-
-    this.nodeMenu.setMouseEnter(() => {
-      this.#clearTimers();
-    });
-
-    this.nodeMenu.setMouseLeave(() => {
+    nodeElem.addEventListener(MOUSE_LEAVE, () => {
       this.nodeMenu.hide();
     });
   }
 
   #editHandler() {
     const { nodeElem } = this.getElements();
-    nodeElem.addEventListener("keyup", (event) => {
+    nodeElem.addEventListener(KEY_UP, (event) => {
       const keyCode = event.keyCode;
-      if (keyCode === 13) {
+      if (keyCode === ENTER_KEY) {
         this.#editNode(nodeElem.value);
+        this.eventCallbacks.edit?.();
         nodeElem.blur();
       }
     });
