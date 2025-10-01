@@ -7,10 +7,9 @@ import {
 } from "../constants/events.js";
 
 export class Node {
-  constructor(node, nodeMenu, eventCallbacks) {
+  constructor(node, nodeMenu) {
     this.node = node;
     this.nodeMenu = nodeMenu;
-    this.eventCallbacks = eventCallbacks;
     this.html = undefined;
     this.#createNode();
   }
@@ -53,7 +52,6 @@ export class Node {
       const keyCode = event.keyCode;
       if (keyCode === ENTER_KEY) {
         this.#editNode(nodeElem.value);
-        this.eventCallbacks.edit?.();
         nodeElem.blur();
       }
     });
