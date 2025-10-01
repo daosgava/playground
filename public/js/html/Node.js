@@ -41,9 +41,9 @@ export class Node {
       this.nodeMenu.show();
     });
 
-    // nodeElem.addEventListener(MOUSE_LEAVE, () => {
-    //   this.nodeMenu.hide();
-    // });
+    nodeElem.addEventListener(MOUSE_LEAVE, () => {
+      this.nodeMenu.hide();
+    });
   }
 
   #editHandler() {
