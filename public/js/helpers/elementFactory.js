@@ -29,14 +29,25 @@ export const createNodeElem = (node) => {
     classes: ["node"],
     value: node.value,
   });
-  const nodeContainerElem = createHtmlElem({
+
+  return { nodeElem };
+};
+
+export const createSubTreeElem = (nodeElem) => {
+  const subTreeElem = createHtmlElem({
     tag: "div",
     classes: ["node-container"],
   });
 
-  nodeContainerElem.appendChild(nodeElem);
+  const childrenContainerElem = createHtmlElem({
+    tag: "div",
+    classes: ["children-container"],
+  });
 
-  return { nodeElem, nodeContainerElem };
+  subTreeElem.appendChild(nodeElem);
+  subTreeElem.appendChild(childrenContainerElem);
+
+  return { nodeElem, subTreeElem, childrenContainerElem };
 };
 
 export const createNodeMenuElem = () => {

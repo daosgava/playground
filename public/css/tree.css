@@ -13,6 +13,12 @@
     flex: 1;
 }
 
+.children-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
 input.node {
     align-items: center;
     background-color: var(--light-color);

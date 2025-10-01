@@ -1,4 +1,4 @@
-import { createSeparatorElem } from "../helpers/elementFactory.js";
+import { createSubTreeElem } from "../helpers/elementFactory.js";
 import { NodeMenu } from "./NodeMenu.js";
 import { Node } from "./Node.js";
 
@@ -34,7 +34,7 @@ export class Tree {
     this.#initMenu();
   }
 
-  #addJoinLine(nodeElem, node) {
+  #joinLine(node) {
     const { separator, vline, hline } = createSeparatorElem();
 
     const hasLeft = node.left && node.left?.value !== undefined;
@@ -48,12 +48,7 @@ export class Tree {
       separator.appendChild(hline);
     }
 
-    nodeElem.appendChild(separator);
-  }
-
-  #appendElem(nodeContainerElem, htmlContainer) {
-    htmlContainer.appendChild(nodeContainerElem);
-    htmlContainer.classList.add("parent");
+    return separator;
   }
 
   // Based on Depth-First
@@ -65,14 +60,14 @@ export class Tree {
 
     const htmlNode = new Node(currentNode, this.nodeMenu);
 
-    const { nodeContainerElem } = htmlNode.getElements();
+    const { nodeElem } = htmlNode.getElements();
+    const { subTreeElem, childrenContainerElem } = createSubTreeElem(nodeElem);
 
-    this.#appendElem(nodeContainerElem, currentContainer);
-    this.#addJoinLine(nodeContainerElem, currentNode);
+    currentContainer.appendChild(subTreeElem);
 
     return (
-      this.drawTree(nodeContainerElem, currentNode.left, true) ||
-      this.drawTree(nodeContainerElem, currentNode.right, true)
+      this.drawTree(childrenContainerElem, currentNode.left, true) ||
+      this.drawTree(childrenContainerElem, currentNode.right, true)
     );
   }
 }

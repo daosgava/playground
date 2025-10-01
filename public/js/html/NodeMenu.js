@@ -60,9 +60,9 @@ export class NodeMenu {
   setClickDelete(cb) {
     const { deleteElem } = this.getElements();
     deleteElem.addEventListener(CLICK, () => {
-      this.selectedNode.value = undefined;
-      this.selectedNode.right = undefined;
-      this.selectedNode.left = undefined;
+      delete this.selectedNode.value;
+      delete this.selectedNode.right;
+      delete this.selectedNode.left;
       cb?.();
     });
   }
