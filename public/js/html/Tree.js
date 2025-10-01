@@ -9,11 +9,21 @@ export class Tree {
     this.#initMenu();
   }
 
+  #resetTree() {
+    this.#resetRootContainer();
+    this.drawTree();
+  }
+
   #initMenu() {
     this.nodeMenu = new NodeMenu();
     this.nodeMenu.setClickDelete(() => {
-      this.#resetRootContainer();
-      this.drawTree();
+      this.#resetTree();
+    });
+    this.nodeMenu.setClickLeft(() => {
+      this.#resetTree();
+    });
+    this.nodeMenu.setClickRight(() => {
+      this.#resetTree();
     });
     const { menuElem } = this.nodeMenu.getElements();
     this.rootContainer.appendChild(menuElem);
@@ -27,8 +37,8 @@ export class Tree {
   #addJoinLine(nodeElem, node) {
     const { separator, vline, hline } = createSeparatorElem();
 
-    const hasLeft = node.left && node.left?.value;
-    const hasRight = node.right && node.right?.value;
+    const hasLeft = node.left && node.left?.value !== undefined;
+    const hasRight = node.right && node.right?.value !== undefined;
 
     if (hasLeft || hasRight) {
       separator.appendChild(vline);
@@ -51,7 +61,7 @@ export class Tree {
     const currentNode = isChild ? node : this.root;
     const currentContainer = isChild ? container : this.rootContainer;
 
-    if (!currentNode?.value) return;
+    if (currentNode?.value === undefined) return;
 
     const htmlNode = new Node(currentNode, this.nodeMenu);
 
