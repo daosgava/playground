@@ -1,16 +1,8 @@
 .node-container {
+    align-items: center;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     height: fit-content;
-    flex: 1;
-}
-
-.children-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
 }
 
 input.node {
@@ -25,6 +17,7 @@ input.node {
     height: 2rem;
     text-align: center;
     width: 2rem;
+    z-index: 10;
 
     &:hover {
         font-weight: 600;

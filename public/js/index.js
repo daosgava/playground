@@ -6,6 +6,7 @@ const loadStyles = () => {
     "./css/tree.css",
     "./css/nodeMenu.css",
     "./css/node.css",
+    "./css/connector.css",
   ];
   styles.forEach((url) =>
     loadAsset({ url, type: "text/css", isScript: false }),

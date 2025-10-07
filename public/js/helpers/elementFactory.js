@@ -23,20 +23,27 @@ export const createInputElem = ({ classes, id, value }) => {
   return inputElem;
 };
 
-export const createNodeElem = (node) => {
+export const createNodeElem = (node, index) => {
   const nodeElem = createInputElem({
-    id: `node-${node.value}`,
+    id: `node-${index}-${node.value}`,
     classes: ["node"],
     value: node.value,
   });
 
+  nodeElem.style.anchorName = `--node-${index}-${node.value}`;
+
   return { nodeElem };
 };
 
-export const createSubTreeElem = (nodeElem) => {
+export const createSubTreeElem = () => {
   const subTreeElem = createHtmlElem({
     tag: "div",
     classes: ["node-container"],
+  });
+
+  const rootElem = createHtmlElem({
+    tag: "div",
+    classes: ["root"],
   });
 
   const childrenContainerElem = createHtmlElem({
@@ -44,10 +51,23 @@ export const createSubTreeElem = (nodeElem) => {
     classes: ["children-container"],
   });
 
-  subTreeElem.appendChild(nodeElem);
+  const leftElem = createHtmlElem({
+    tag: "div",
+    classes: ["child", "left"],
+  });
+
+  const rightElem = createHtmlElem({
+    tag: "div",
+    classes: ["child", "right"],
+  });
+
+  childrenContainerElem.appendChild(leftElem);
+  childrenContainerElem.appendChild(rightElem);
+
+  subTreeElem.appendChild(rootElem);
   subTreeElem.appendChild(childrenContainerElem);
 
-  return { nodeElem, subTreeElem, childrenContainerElem };
+  return { subTreeElem, rootElem, leftElem, rightElem };
 };
 
 export const createNodeMenuElem = () => {
@@ -67,10 +87,8 @@ export const createNodeMenuElem = () => {
   return { menuElem, leftElem, rightElem, deleteElem };
 };
 
-export const createSeparatorElem = () => {
-  const separator = createHtmlElem({ tag: "div", classes: ["separator"] });
-  const vline = createHtmlElem({ tag: "div", classes: ["vline"] });
-  const hline = createHtmlElem({ tag: "div", classes: ["hline"] });
+export const createConnectorElem = () => {
+  const connectorElem = createHtmlElem({ tag: "div", classes: ["connector"] });
 
-  return { separator, vline, hline };
+  return { connectorElem };
 };

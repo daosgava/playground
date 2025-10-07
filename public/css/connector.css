@@ -1,0 +1,8 @@
+.connector {
+    border: var(--branch-border);
+    border-bottom: none;
+    border-radius: 10rem;
+    min-block-size: 1rem;
+    min-inline-size: 1rem;
+    position: absolute;
+}

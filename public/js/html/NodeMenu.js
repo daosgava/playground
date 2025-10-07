@@ -70,7 +70,7 @@ export class NodeMenu {
   setClickLeft(cb) {
     const { leftElem } = this.getElements();
     leftElem.addEventListener(CLICK, () => {
-      this.selectedNode.left = new TreeNode(0);
+      this.selectedNode.left = new TreeNode(this.selectedNode.value + 1);
       cb?.();
     });
   }
@@ -78,7 +78,7 @@ export class NodeMenu {
   setClickRight(cb) {
     const { rightElem } = this.getElements();
     rightElem.addEventListener(CLICK, () => {
-      this.selectedNode.right = new TreeNode(0);
+      this.selectedNode.right = new TreeNode(this.selectedNode.value + 2);
       cb?.();
     });
   }
