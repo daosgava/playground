@@ -72,19 +72,38 @@ export const createSubTreeElem = () => {
 
 export const createNodeMenuElem = () => {
   const menuElem = createHtmlElem({ tag: "div", classes: ["node-menu"] });
-  const leftElem = createHtmlElem({ tag: "div", classes: ["add-left"] });
-  const deleteElem = createHtmlElem({ tag: "div", classes: ["delete-node"] });
-  const rightElem = createHtmlElem({ tag: "div", classes: ["add-right"] });
+  const leftButtonElem = createHtmlElem({ tag: "div", classes: ["button"] });
+  const deleteButtonElem = createHtmlElem({
+    tag: "div",
+    classes: ["button"],
+  });
+  const rightButtonElem = createHtmlElem({
+    tag: "div",
+    classes: ["button"],
+  });
 
-  leftElem.innerText = LETT_BUTTON;
-  rightElem.innerText = RIGHT_BUTTON;
-  deleteElem.innerText = DELETE_BUTTON;
+  const rightArrowElem = createHtmlElem({
+    tag: "div",
+    classes: ["arrow", "right"],
+  });
+  const leftArrowElem = createHtmlElem({
+    tag: "div",
+    classes: ["arrow", "left"],
+  });
+  const deleteArrowElem = createHtmlElem({
+    tag: "div",
+    classes: ["arrow", "delete"],
+  });
 
-  menuElem.appendChild(leftElem);
-  menuElem.appendChild(deleteElem);
-  menuElem.appendChild(rightElem);
+  leftButtonElem.appendChild(leftArrowElem);
+  rightButtonElem.appendChild(rightArrowElem);
+  deleteButtonElem.appendChild(deleteArrowElem);
 
-  return { menuElem, leftElem, rightElem, deleteElem };
+  menuElem.appendChild(leftButtonElem);
+  menuElem.appendChild(deleteButtonElem);
+  menuElem.appendChild(rightButtonElem);
+
+  return { menuElem, leftButtonElem, rightButtonElem, deleteButtonElem };
 };
 
 export const createConnectorElem = () => {

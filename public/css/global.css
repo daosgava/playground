@@ -3,6 +3,7 @@
     --light-color: lightseagreen;
     --leaf-color: #8bc34a;
     --branch-color: #a5582a;
+    --red-color: firebrick;
     --dark-border: 0.2rem solid var(--dark-color);
     --leaf-border: 0.2rem solid var(--leaf-color);
     --branch-border: 0.2rem solid var(--branch-color);

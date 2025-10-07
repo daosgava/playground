@@ -58,8 +58,8 @@ export class NodeMenu {
   }
 
   setClickDelete(cb) {
-    const { deleteElem } = this.getElements();
-    deleteElem.addEventListener(CLICK, () => {
+    const { deleteButtonElem } = this.getElements();
+    deleteButtonElem.addEventListener(CLICK, () => {
       delete this.selectedNode.value;
       delete this.selectedNode.right;
       delete this.selectedNode.left;
@@ -68,26 +68,26 @@ export class NodeMenu {
   }
 
   setClickLeft(cb) {
-    const { leftElem } = this.getElements();
-    leftElem.addEventListener(CLICK, () => {
+    const { leftButtonElem } = this.getElements();
+    leftButtonElem.addEventListener(CLICK, () => {
       this.selectedNode.left = new TreeNode(this.selectedNode.value + 1);
       cb?.();
     });
   }
 
   setClickRight(cb) {
-    const { rightElem } = this.getElements();
-    rightElem.addEventListener(CLICK, () => {
+    const { rightButtonElem } = this.getElements();
+    rightButtonElem.addEventListener(CLICK, () => {
       this.selectedNode.right = new TreeNode(this.selectedNode.value + 2);
       cb?.();
     });
   }
 
   #showAddButtons() {
-    const { rightElem, leftElem } = this.getElements();
-    rightElem.style.opacity =
+    const { rightButtonElem, leftButtonElem } = this.getElements();
+    rightButtonElem.style.opacity =
       this.selectedNode?.right?.value !== undefined ? 0 : 1;
-    leftElem.style.opacity =
+    leftButtonElem.style.opacity =
       this.selectedNode?.left?.value !== undefined ? 0 : 1;
   }
 }
