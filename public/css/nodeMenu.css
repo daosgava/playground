@@ -6,13 +6,11 @@
     transform: translate(-2.4rem, 2rem);
     opacity: 0;
     position: absolute;
-    transition: opacity 0.2s ease-in;
     z-index: 100;
 
     & > div {
         cursor: pointer;
         color: var(--leaf-color);
-        transition: all 0.2s ease-in;
 
         &:hover {
             font-weight: 700;

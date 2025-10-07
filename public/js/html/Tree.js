@@ -11,7 +11,7 @@ export class Tree {
 
   #resetTree() {
     this.#resetRootContainer();
-    this.drawTree();
+    this.draw();
   }
 
   #initMenu() {
