@@ -1,5 +1,3 @@
-import { LETT_BUTTON, RIGHT_BUTTON, DELETE_BUTTON } from "../constants/menu.js";
-
 export const createHtmlElem = ({ tag, classes, id, innerText }) => {
   const elem = document.createElement(tag);
   classes.forEach((cssClass) => elem.classList.add(cssClass));
