@@ -52,7 +52,7 @@ export class Tree {
   }
 
   // Based on Depth-First
-  drawTree(container, node, isChild) {
+  draw(container, node, isChild) {
     const currentNode = isChild ? node : this.root;
     const currentContainer = isChild ? container : this.rootContainer;
 
@@ -66,8 +66,8 @@ export class Tree {
     currentContainer.appendChild(subTreeElem);
 
     return (
-      this.drawTree(childrenContainerElem, currentNode.left, true) ||
-      this.drawTree(childrenContainerElem, currentNode.right, true)
+      this.draw(childrenContainerElem, currentNode.left, true) ||
+      this.draw(childrenContainerElem, currentNode.right, true)
     );
   }
 }
