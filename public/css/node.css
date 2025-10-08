@@ -5,6 +5,15 @@
     height: fit-content;
 }
 
+@keyframes leafTick {
+    from {
+        border-color: var(--red-color);
+    }
+    to {
+        border-color: var(--leaf-color);
+    }
+}
+
 input.node {
     align-items: center;
     background-color: var(--light-color);
@@ -24,6 +33,7 @@ input.node {
     }
 
     &:focus {
+        animation: leafTick 2s infinite alternate-reverse;
         font-weight: 600;
     }
 
