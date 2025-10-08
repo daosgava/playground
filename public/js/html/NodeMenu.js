@@ -70,16 +70,16 @@ export class NodeMenu {
   setClickLeft(cb) {
     const { leftButtonElem } = this.getElements();
     leftButtonElem.addEventListener(CLICK, () => {
-      this.selectedNode.left = new TreeNode(this.selectedNode.value + 1);
-      cb?.();
+      this.selectedNode.left = new TreeNode("");
+      cb?.(this.selectedNode.left);
     });
   }
 
   setClickRight(cb) {
     const { rightButtonElem } = this.getElements();
     rightButtonElem.addEventListener(CLICK, () => {
-      this.selectedNode.right = new TreeNode(this.selectedNode.value + 2);
-      cb?.();
+      this.selectedNode.right = new TreeNode("");
+      cb?.(this.selectedNode.right);
     });
   }
 

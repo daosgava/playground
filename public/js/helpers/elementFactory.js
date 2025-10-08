@@ -21,14 +21,14 @@ export const createInputElem = ({ classes, id, value }) => {
   return inputElem;
 };
 
-export const createNodeElem = (node, index) => {
+export const createNodeElem = (node) => {
   const nodeElem = createInputElem({
-    id: `node-${index}-${node.value}`,
+    id: `node-${node.id}`,
     classes: ["node"],
     value: node.value,
   });
 
-  nodeElem.style.anchorName = `--node-${index}-${node.value}`;
+  nodeElem.style.anchorName = `--node-${node.id}`;
 
   return { nodeElem };
 };

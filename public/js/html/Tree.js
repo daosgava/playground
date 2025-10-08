@@ -4,16 +4,10 @@ import { Node } from "./Node.js";
 import { Connector } from "./Connector.js";
 
 export class Tree {
-  #nodeCounter = 0;
-
   constructor(rootContainer, root) {
     this.rootContainer = rootContainer;
     this.root = root;
     this.#initMenu();
-  }
-
-  #increaseNodeCounter() {
-    this.#nodeCounter += 1;
   }
 
   #resetTree() {
@@ -26,12 +20,16 @@ export class Tree {
     this.nodeMenu.setClickDelete(() => {
       this.#resetTree();
     });
-    this.nodeMenu.setClickLeft(() => {
+
+    const addNodeHandler = (newNode) => {
       this.#resetTree();
-    });
-    this.nodeMenu.setClickRight(() => {
-      this.#resetTree();
-    });
+      const newNodeElem = document.querySelector(`#node-${newNode.id}`);
+      newNodeElem.focus();
+    };
+
+    this.nodeMenu.setClickLeft(addNodeHandler);
+    this.nodeMenu.setClickRight(addNodeHandler);
+
     const { menuElem } = this.nodeMenu.getElements();
     this.rootContainer.appendChild(menuElem);
   }
@@ -56,17 +54,14 @@ export class Tree {
 
     if (currentNode?.value === undefined) return;
 
-    const htmlNode = new Node(currentNode, this.nodeMenu, this.#nodeCounter);
-
+    const htmlNode = new Node(currentNode, this.nodeMenu);
     const { nodeElem } = htmlNode.getElements();
-    const { subTreeElem, rootElem, leftElem, rightElem } =
-      createSubTreeElem(nodeElem);
 
+    const { subTreeElem, rootElem, leftElem, rightElem } = createSubTreeElem();
     rootElem.appendChild(nodeElem);
     currentContainer.appendChild(subTreeElem);
 
     this.#connectNodes(parentNode, nodeElem, isLeft);
-    this.#increaseNodeCounter();
 
     return (
       this.draw({
