@@ -33,7 +33,7 @@ input.node {
     }
 
     &:focus {
-        animation: leafTick 2s infinite alternate-reverse;
+        animation: leafTick 1.5s infinite alternate;
         font-weight: 600;
     }
 
