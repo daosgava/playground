@@ -20,19 +20,14 @@ const initializeTree = () => {
   root.left.left.left = new TreeNode(8);
   root.left.left.right = new TreeNode(9);
 
-  const htmlTree = new Tree(root);
-  const { treeContainer } = htmlTree.getElements();
-  appContainer.appendChild(treeContainer);
-
+  const htmlTree = new Tree(root, appContainer);
   htmlTree.draw();
 
   return htmlTree;
 };
 
 const initializeMenu = (treeInstance) => {
-  const menu = new OpMenu(treeInstance);
-  const { containerElem } = menu.getElements();
-  appContainer.appendChild(containerElem);
+  new OpMenu(treeInstance, appContainer);
 };
 
 const app = () => {

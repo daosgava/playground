@@ -8,10 +8,12 @@ import { Node } from "./Node.js";
 import { Connector } from "./Connector.js";
 
 export class Tree {
-  constructor(root) {
+  constructor(root, appContainer) {
+    this.appContainer = appContainer;
     this.root = root;
     this.#createTreeContainer();
     this.#initNodeMenu();
+    this.#addToPage();
   }
 
   #createTreeContainer() {
@@ -20,6 +22,11 @@ export class Tree {
 
   getElements() {
     return { treeContainer: this.treeContainer };
+  }
+
+  #addToPage() {
+    const { treeContainer } = this.getElements();
+    this.appContainer.appendChild(treeContainer);
   }
 
   resetTree() {
