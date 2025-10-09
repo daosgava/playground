@@ -4,7 +4,7 @@ import { DFS_ID, BFS_ID } from "../constants/OpMenu.js";
 export class OpMenu {
   constructor(treeInstance) {
     this.treeInstance = treeInstance;
-    this.operation = undefined;
+    this.operation = DFS_ID;
     this.#createMenu();
     this.#attachHandlers();
   }
@@ -23,7 +23,7 @@ export class OpMenu {
   }
 
   #handleSelectOperation() {
-    const { selectElem, buttonElem } = this.getElements();
+    const { selectElem } = this.getElements();
     selectElem.addEventListener("change", (event) => {
       this.operation = event.target.value;
     });
