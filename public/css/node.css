@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     height: fit-content;
+    width: fit-content;
 }
 
 @keyframes leafTick {
@@ -40,4 +41,8 @@ input.node {
     &:focus-visible {
         outline: none;
     }
+}
+
+input.node.found {
+    border: var(--red-border);
 }

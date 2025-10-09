@@ -7,22 +7,22 @@ export class Tree {
   constructor(rootContainer, root) {
     this.rootContainer = rootContainer;
     this.root = root;
-    this.#initMenu();
+    this.#initNodeMenu();
   }
 
-  #resetTree() {
+  resetTree() {
     this.#resetRootContainer();
     this.draw();
   }
 
-  #initMenu() {
+  #initNodeMenu() {
     this.nodeMenu = new NodeMenu();
     this.nodeMenu.setClickDelete(() => {
-      this.#resetTree();
+      this.resetTree();
     });
 
     const addNodeHandler = (newNode) => {
-      this.#resetTree();
+      this.resetTree();
       const newNodeElem = document.querySelector(`#node-${newNode.id}`);
       newNodeElem.focus();
     };
@@ -36,7 +36,7 @@ export class Tree {
 
   #resetRootContainer() {
     this.rootContainer.replaceChildren();
-    this.#initMenu();
+    this.#initNodeMenu();
   }
 
   #connectNodes(parentNode, currentNode, isLeft) {
@@ -54,13 +54,18 @@ export class Tree {
 
     if (currentNode?.value === undefined) return;
 
+    // Create HTML Node
     const htmlNode = new Node(currentNode, this.nodeMenu);
     const { nodeElem } = htmlNode.getElements();
 
+    // Create Subtree
     const { subTreeElem, rootElem, leftElem, rightElem } = createSubTreeElem();
+
+    // Place elements on the page
     rootElem.appendChild(nodeElem);
     currentContainer.appendChild(subTreeElem);
 
+    // Connect Nodes
     this.#connectNodes(parentNode, nodeElem, isLeft);
 
     return (
@@ -78,6 +83,20 @@ export class Tree {
         parentNode: nodeElem,
         isLeft: false,
       })
+    );
+  }
+
+  searchNode(node, target) {
+    if (!node?.value) return;
+
+    if (node.value === target || node.value === Number(target)) {
+      const foundElement = document.querySelector(`#node-${node.id}`);
+      foundElement.classList.add("found");
+      return;
+    }
+
+    return (
+      this.searchNode(node.left, target) || this.searchNode(node.right, target)
     );
   }
 }

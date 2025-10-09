@@ -1,6 +1,6 @@
-export const createHtmlElem = ({ tag, classes, id, innerText }) => {
+export const createHtmlElem = ({ tag, classes, id, innerText, value }) => {
   const elem = document.createElement(tag);
-  classes.forEach((cssClass) => elem.classList.add(cssClass));
+  classes?.forEach((cssClass) => elem.classList.add(cssClass));
 
   if (id) {
     elem.id = id;
@@ -13,10 +13,11 @@ export const createHtmlElem = ({ tag, classes, id, innerText }) => {
   return elem;
 };
 
-export const createInputElem = ({ classes, id, value }) => {
+export const createInputElem = ({ classes, id, value, placeholder }) => {
   const inputElem = createHtmlElem({ tag: "input", classes, id });
 
   inputElem.value = value;
+  inputElem.placeholder = placeholder;
 
   return inputElem;
 };
@@ -26,6 +27,7 @@ export const createNodeElem = (node) => {
     id: `node-${node.id}`,
     classes: ["node"],
     value: node.value,
+    placeholder: "∞",
   });
 
   nodeElem.style.anchorName = `--node-${node.id}`;
@@ -108,4 +110,27 @@ export const createConnectorElem = () => {
   const connectorElem = createHtmlElem({ tag: "div", classes: ["connector"] });
 
   return { connectorElem };
+};
+
+export const createMenuElem = () => {
+  const containerElem = createHtmlElem({ tag: "div", id: "menu" });
+  const inputElem = createInputElem({
+    id: "target",
+    value: "",
+    placeholder: "Search number",
+  });
+  const buttonElem = createHtmlElem({
+    tag: "button",
+    id: "search",
+    innerText: "🔍",
+  });
+
+  containerElem.appendChild(inputElem);
+  containerElem.appendChild(buttonElem);
+
+  return {
+    containerElem,
+    inputElem,
+    buttonElem,
+  };
 };

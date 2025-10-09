@@ -1,0 +1,29 @@
+#menu {
+    border: var(--leaf-border);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    width: fit-content;
+
+    input {
+        border: var(--dark-border);
+        border-radius: 0.4rem;
+        padding: 0.2rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        border: var(--dark-border);
+        background-color: none;
+        border-radius: 0.4rem;
+        outline: none;
+    }
+}
