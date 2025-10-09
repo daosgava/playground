@@ -1,5 +1,11 @@
 import { createMenuElem } from "../helpers/elementFactory.js";
-import { DFS_ID, BFS_ID } from "../constants/OpMenu.js";
+import {
+  DFS_ID,
+  BFS_ID,
+  INVERT_ID,
+  INVERT_ICON,
+  SEARCH_ICON,
+} from "../constants/OpMenu.js";
 
 export class OpMenu {
   constructor(treeInstance, appContainer) {
@@ -30,9 +36,13 @@ export class OpMenu {
   }
 
   #handleSelectOperation() {
-    const { selectElem } = this.getElements();
+    const { selectElem, inputElem, buttonElem } = this.getElements();
     selectElem.addEventListener("change", (event) => {
       this.operation = event.target.value;
+
+      inputElem.style.display = this.operation === INVERT_ID ? "none" : "block";
+      buttonElem.innerText =
+        this.operation === INVERT_ID ? INVERT_ICON : SEARCH_ICON;
     });
   }
 
@@ -44,6 +54,8 @@ export class OpMenu {
         this.treeInstance.dfs(this.treeInstance.root, inputElem.value);
       } else if (this.operation === BFS_ID) {
         this.treeInstance.bfs(this.treeInstance.root, inputElem.value);
+      } else if (this.operation === INVERT_ID) {
+        this.treeInstance.invert(this.treeInstance.root);
       }
     });
   }

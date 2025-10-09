@@ -1,4 +1,4 @@
-import { OPTIONS } from "../constants/OpMenu.js";
+import { OPTIONS, SEARCH_ICON } from "../constants/OpMenu.js";
 
 export const createHtmlElem = ({ tag, classes, id, innerText, value }) => {
   const elem = document.createElement(tag);
@@ -147,7 +147,7 @@ export const createMenuElem = () => {
   const buttonElem = createHtmlElem({
     tag: "button",
     id: "search",
-    innerText: "🔍",
+    innerText: SEARCH_ICON,
   });
 
   containerElem.appendChild(selectElem);

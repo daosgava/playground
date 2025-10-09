@@ -26,13 +26,13 @@ const initializeTree = () => {
   return htmlTree;
 };
 
-const initializeMenu = (treeInstance) => {
+const initializeOpMenu = (treeInstance) => {
   new OpMenu(treeInstance, appContainer);
 };
 
 const app = () => {
   const treeInstance = initializeTree();
-  initializeMenu(treeInstance);
+  initializeOpMenu(treeInstance);
 };
 
 app();

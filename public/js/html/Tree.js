@@ -146,4 +146,23 @@ export class Tree {
       if (node.right) queue.push(node.right);
     }
   }
+
+  invert() {
+    this.invertTree();
+    this.resetTree();
+  }
+
+  invertTree(node, isChild) {
+    const currentNode = isChild ? node : this.root;
+    if (!currentNode?.value) return false;
+
+    const temp = currentNode.left;
+    currentNode.left = currentNode.right;
+    currentNode.right = temp;
+
+    return (
+      this.invertTree(currentNode.left, true) ||
+      this.invertTree(currentNode.right, true)
+    );
+  }
 }
