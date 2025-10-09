@@ -46,3 +46,7 @@ input.node {
 input.node.found {
     border: var(--red-border);
 }
+
+input.node.highlight {
+    border: var(--dark-border);
+}

@@ -1,4 +1,5 @@
 import { createSubTreeElem } from "../helpers/elementFactory.js";
+import { wait } from "../helpers/timers.js";
 import { NodeMenu } from "./NodeMenu.js";
 import { Node } from "./Node.js";
 import { Connector } from "./Connector.js";
@@ -86,17 +87,25 @@ export class Tree {
     );
   }
 
-  searchNode(node, target) {
-    if (!node?.value) return;
-
-    if (node.value === target || node.value === Number(target)) {
-      const foundElement = document.querySelector(`#node-${node.id}`);
-      foundElement.classList.add("found");
-      return;
+  async searchNodeDF(node, target) {
+    if (node?.value === undefined) {
+      return false;
     }
 
+    const foundElement = document.querySelector(`#node-${node.id}`);
+
+    if (node.value === target || node.value === Number(target)) {
+      foundElement.classList.add("found");
+      return true;
+    }
+
+    foundElement.classList.toggle("highlight");
+    await wait(0.4);
+    foundElement.classList.toggle("highlight");
+
     return (
-      this.searchNode(node.left, target) || this.searchNode(node.right, target)
+      (await this.searchNodeDF(node?.left, target)) ||
+      (await this.searchNodeDF(node?.right, target))
     );
   }
 }

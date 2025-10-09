@@ -37,7 +37,7 @@ const initializeMenu = (treeInstance) => {
 
   buttonElem.addEventListener("click", () => {
     treeInstance.resetTree();
-    treeInstance.searchNode(treeInstance.root, inputElem.value);
+    treeInstance.searchNodeDF(treeInstance.root, inputElem.value);
   });
 };
 
