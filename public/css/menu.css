@@ -20,7 +20,7 @@
     input {
         border: 0.1rem solid var(--dark-color);
         border-radius: 0.4rem;
-        padding: 0.2rem;
+        padding: 0.5rem;
 
         &:focus {
             outline: none;
@@ -30,7 +30,9 @@
     button {
         border: 0.1rem solid var(--dark-color);
         background-color: none;
-        border-radius: 0.4rem;
+        border-radius: 5rem;
+        height: 2rem;
+        width: 2rem;
         outline: none;
     }
 }

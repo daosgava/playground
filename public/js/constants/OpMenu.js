@@ -1,5 +1,5 @@
 export const DFS_LABEL = "Depth-First";
-export const BFS_LABEL = "Breath-First";
+export const BFS_LABEL = "Breadth-First";
 export const DFS_ID = "dfs";
 export const BFS_ID = "bfs";
 
