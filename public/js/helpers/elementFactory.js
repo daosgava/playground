@@ -1,3 +1,5 @@
+import { OPTIONS } from "../constants/OpMenu.js";
+
 export const createHtmlElem = ({ tag, classes, id, innerText, value }) => {
   const elem = document.createElement(tag);
   classes?.forEach((cssClass) => elem.classList.add(cssClass));
@@ -8,6 +10,10 @@ export const createHtmlElem = ({ tag, classes, id, innerText, value }) => {
 
   if (innerText) {
     elem.innerText = innerText;
+  }
+
+  if (value) {
+    elem.value = value;
   }
 
   return elem;
@@ -112,12 +118,31 @@ export const createConnectorElem = () => {
   return { connectorElem };
 };
 
+export const createSelectElem = ({ id, options }) => {
+  const selectElem = createHtmlElem({ tag: "select", id });
+  options.forEach((option) => {
+    const optionElem = createHtmlElem({
+      tag: "option",
+      id: option.id,
+      value: option.value,
+      innerText: option.text,
+    });
+    selectElem.appendChild(optionElem);
+  });
+
+  return { selectElem };
+};
+
 export const createMenuElem = () => {
   const containerElem = createHtmlElem({ tag: "div", id: "menu" });
+  const { selectElem } = createSelectElem({
+    id: "operation",
+    options: OPTIONS,
+  });
   const inputElem = createInputElem({
     id: "target",
     value: "",
-    placeholder: "Search number",
+    placeholder: "Search Node",
   });
   const buttonElem = createHtmlElem({
     tag: "button",
@@ -125,6 +150,7 @@ export const createMenuElem = () => {
     innerText: "🔍",
   });
 
+  containerElem.appendChild(selectElem);
   containerElem.appendChild(inputElem);
   containerElem.appendChild(buttonElem);
 
@@ -132,5 +158,6 @@ export const createMenuElem = () => {
     containerElem,
     inputElem,
     buttonElem,
+    selectElem,
   };
 };
