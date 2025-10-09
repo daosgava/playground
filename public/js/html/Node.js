@@ -7,7 +7,7 @@ import {
 } from "../constants/events.js";
 
 export class Node {
-  constructor(node, nodeMenu, index) {
+  constructor(node, nodeMenu) {
     this.node = node;
     this.nodeMenu = nodeMenu;
     this.html = undefined;

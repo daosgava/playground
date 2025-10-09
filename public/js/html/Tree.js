@@ -9,6 +9,7 @@ import { Connector } from "./Connector.js";
 
 export class Tree {
   constructor(root, appContainer) {
+    this.treeId = window.crypto.randomUUID();
     this.appContainer = appContainer;
     this.root = root;
     this.#createTreeContainer();
@@ -17,7 +18,10 @@ export class Tree {
   }
 
   #createTreeContainer() {
-    this.treeContainer = createHtmlElem({ tag: "div", id: "tree" });
+    this.treeContainer = createHtmlElem({
+      tag: "div",
+      id: `tree-${this.treeId}`,
+    });
   }
 
   getElements() {

@@ -14,14 +14,14 @@ const loadStyles = () => {
   );
 };
 
-const loadScripts = () => {
+const loadApp = () => {
   const scripts = ["./js/app.js"];
   scripts.forEach((url) => loadAsset({ url, type: "module", isScript: true }));
 };
 
 const main = () => {
   loadStyles();
-  loadScripts();
+  loadApp();
 };
 
 main();
