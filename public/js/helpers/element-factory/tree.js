@@ -1,4 +1,4 @@
-import { OPTIONS, SEARCH_ICON } from "../constants/OpMenu.js";
+import { OPTIONS, SEARCH_ICON } from "../../constants/OpMenu.js";
 
 export const createHtmlElem = ({ tag, classes, id, innerText, value }) => {
   const elem = document.createElement(tag);
@@ -74,42 +74,6 @@ export const createSubTreeElem = () => {
   subTreeElem.appendChild(childrenContainerElem);
 
   return { subTreeElem, rootElem, leftElem, rightElem };
-};
-
-export const createNodeMenuElem = () => {
-  const menuElem = createHtmlElem({ tag: "div", classes: ["node-menu"] });
-  const leftButtonElem = createHtmlElem({ tag: "div", classes: ["button"] });
-  const deleteButtonElem = createHtmlElem({
-    tag: "div",
-    classes: ["button"],
-  });
-  const rightButtonElem = createHtmlElem({
-    tag: "div",
-    classes: ["button"],
-  });
-
-  const rightArrowElem = createHtmlElem({
-    tag: "div",
-    classes: ["arrow", "right"],
-  });
-  const leftArrowElem = createHtmlElem({
-    tag: "div",
-    classes: ["arrow", "left"],
-  });
-  const deleteArrowElem = createHtmlElem({
-    tag: "div",
-    classes: ["arrow", "delete"],
-  });
-
-  leftButtonElem.appendChild(leftArrowElem);
-  rightButtonElem.appendChild(rightArrowElem);
-  deleteButtonElem.appendChild(deleteArrowElem);
-
-  menuElem.appendChild(leftButtonElem);
-  menuElem.appendChild(deleteButtonElem);
-  menuElem.appendChild(rightButtonElem);
-
-  return { menuElem, leftButtonElem, rightButtonElem, deleteButtonElem };
 };
 
 export const createConnectorElem = () => {

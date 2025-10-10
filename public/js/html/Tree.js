@@ -1,7 +1,7 @@
 import {
   createSubTreeElem,
   createHtmlElem,
-} from "../helpers/elementFactory.js";
+} from "../helpers/element-factory/tree.js";
 import { wait } from "../helpers/timers.js";
 import { NodeMenu } from "./NodeMenu.js";
 import { Node } from "./Node.js";
@@ -62,6 +62,7 @@ export class Tree {
     this.#initNodeMenu();
   }
 
+  // Not good enough
   #connectNodes(parentNode, currentNode, isLeft) {
     if (!parentNode || !currentNode) return;
     const connector = new Connector(parentNode, currentNode, isLeft);

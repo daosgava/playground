@@ -1,0 +1,27 @@
+#nary-tree-container {
+    .node-container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        gap: 1rem;
+        width: fit-content;
+    }
+
+    .root {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .children-container {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .child {
+        display: flex;
+        min-width: 2rem;
+    }
+}

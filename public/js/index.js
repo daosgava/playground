@@ -3,11 +3,13 @@ import { loadAsset } from "./helpers/assetsLoader.js";
 const loadStyles = () => {
   const styles = [
     "./css/global.css",
+    "./css/app.css",
     "./css/tree.css",
     "./css/nodeMenu.css",
     "./css/node.css",
     "./css/connector.css",
     "./css/menu.css",
+    "./css/naryTree.css",
   ];
   styles.forEach((url) =>
     loadAsset({ url, type: "text/css", isScript: false }),

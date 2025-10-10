@@ -1,7 +1,15 @@
 export class NaryTreeNode {
+  #children = [];
   constructor(value) {
     this.id = window.crypto.randomUUID();
     this.value = value;
-    this.children = [];
+  }
+
+  addChild(child) {
+    this.#children.push(child);
+  }
+
+  getChildren() {
+    return this.#children;
   }
 }

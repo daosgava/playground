@@ -1,4 +1,4 @@
-import { createNodeElem } from "../helpers/elementFactory.js";
+import { createNodeElem } from "../helpers/element-factory/tree.js";
 import {
   MOUSE_ENTER,
   MOUSE_LEAVE,

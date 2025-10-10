@@ -1,4 +1,4 @@
-import { createMenuElem } from "../helpers/elementFactory.js";
+import { createMenuElem } from "../helpers/element-factory/menuOp.js";
 import {
   DFS_ID,
   BFS_ID,
