@@ -58,6 +58,7 @@ const initializeNaryTree = () => {
   children[1].addChild(new NaryTreeNode(6));
   children[1].addChild(new NaryTreeNode(7));
   children[2].addChild(new NaryTreeNode(8));
+  children[2].addChild(new NaryTreeNode(9));
 
   const naryTree = new NaryTree(root, naryTreeContainer);
   naryTree.draw();

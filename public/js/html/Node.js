@@ -18,7 +18,9 @@ export class Node {
     this.html = createNodeElem(this.node);
 
     this.#attachHandlers();
-    this.#attachMenu();
+    if (this.nodeMenu) {
+      this.#attachMenu();
+    }
   }
 
   getElements() {
