@@ -16,9 +16,6 @@
     }
 
     .children-container {
-        border: var(--branch-border);
-        border-inline: none;
-        border-bottom: none;
         display: flex;
         flex-direction: row;
         gap: 1rem;
@@ -27,5 +24,19 @@
     .child {
         display: flex;
         min-width: 2rem;
+    }
+
+    .hLine {
+        background-color: var(--branch-color);
+        height: 0.2rem;
+        margin-bottom: 0.6rem;
+        position: absolute;
+    }
+
+    .limb {
+        background-color: var(--branch-color);
+        height: 2.05rem;
+        width: 0.2rem;
+        position: absolute;
     }
 }
