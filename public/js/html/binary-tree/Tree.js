@@ -1,41 +1,24 @@
-import {
-  createSubTreeElem,
-  createHtmlElem,
-} from "../helpers/element-factory/tree.js";
-import { wait } from "../helpers/timers.js";
-import { NodeMenu } from "./NodeMenu.js";
-import { Node } from "./Node.js";
+import { createSubTreeElem } from "../../helpers/element-factory/tree.js";
+import { wait } from "../../helpers/timers.js";
+import { NodeMenu } from "../menu/NodeMenu.js";
+import { Node } from "../tree-node/Node.js";
 import { Connector } from "./Connector.js";
+import { TreeGeneric } from "../TreeGeneric.js";
 
-export class Tree {
+export class Tree extends TreeGeneric {
   constructor(root, appContainer) {
-    this.treeId = window.crypto.randomUUID();
-    this.appContainer = appContainer;
-    this.root = root;
-    this.#createTreeContainer();
+    super(root, appContainer);
     this.#initNodeMenu();
-    this.#addToPage();
-  }
-
-  #createTreeContainer() {
-    this.treeContainer = createHtmlElem({
-      tag: "div",
-      id: `tree-${this.treeId}`,
-    });
-  }
-
-  getElements() {
-    return { treeContainer: this.treeContainer };
-  }
-
-  #addToPage() {
-    const { treeContainer } = this.getElements();
-    this.appContainer.appendChild(treeContainer);
   }
 
   resetTree() {
     this.#resetRootContainer();
     this.draw();
+  }
+
+  #resetRootContainer() {
+    this.treeContainer.replaceChildren();
+    this.#initNodeMenu();
   }
 
   #initNodeMenu() {
@@ -57,12 +40,6 @@ export class Tree {
     this.treeContainer.appendChild(menuElem);
   }
 
-  #resetRootContainer() {
-    this.treeContainer.replaceChildren();
-    this.#initNodeMenu();
-  }
-
-  // Not good enough
   #connectNodes(parentNode, currentNode, isLeft) {
     if (!parentNode || !currentNode) return;
     const connector = new Connector(parentNode, currentNode, isLeft);

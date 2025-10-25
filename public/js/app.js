@@ -1,8 +1,8 @@
 import { TreeNode } from "./structures/TreeNode.js";
 import { NaryTreeNode } from "./structures/NaryTreeNode.js";
-import { Tree } from "./html/Tree.js";
-import { NaryTree } from "./html/NaryTree.js";
-import { OpMenu } from "./html/OpMenu.js";
+import { Tree } from "./html/binary-tree/Tree.js";
+import { NaryTree } from "./html/nary-tree/NaryTree.js";
+import { OpMenu } from "./html/menu/OpMenu.js";
 import { APP_ID } from "./constants/app.js";
 import { createHtmlElem } from "./helpers/element-factory/generic.js";
 
@@ -49,16 +49,26 @@ const initializeNaryTree = () => {
   appContainer.appendChild(naryTreeContainer);
 
   const root = new NaryTreeNode(1);
-  root.addChild(new NaryTreeNode(2));
-  root.addChild(new NaryTreeNode(3));
-  root.addChild(new NaryTreeNode(4));
 
-  const children = root.getChildren();
-  children[1].addChild(new NaryTreeNode(5));
-  children[1].addChild(new NaryTreeNode(6));
-  children[1].addChild(new NaryTreeNode(7));
-  children[2].addChild(new NaryTreeNode(8));
-  children[2].addChild(new NaryTreeNode(9));
+  const a = new NaryTreeNode(2);
+  const b = new NaryTreeNode(3);
+  const c = new NaryTreeNode(4);
+  root.addChild(a);
+  root.addChild(b);
+  root.addChild(c);
+
+  const d = new NaryTreeNode(5);
+  const e = new NaryTreeNode(6);
+  a.addChild(d);
+  a.addChild(e);
+
+  const f = new NaryTreeNode(7);
+  const g = new NaryTreeNode(8);
+  d.addChild(f);
+  d.addChild(g);
+
+  const h = new NaryTreeNode(9);
+  g.addChild(h);
 
   const naryTree = new NaryTree(root, naryTreeContainer);
   naryTree.draw();

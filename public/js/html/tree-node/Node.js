@@ -1,10 +1,10 @@
-import { createNodeElem } from "../helpers/element-factory/tree.js";
+import { createNodeElem } from "../../helpers/element-factory/tree.js";
 import {
   MOUSE_ENTER,
   MOUSE_LEAVE,
   KEY_UP,
   ENTER_KEY,
-} from "../constants/events.js";
+} from "../../constants/events.js";
 
 export class Node {
   constructor(node, nodeMenu) {

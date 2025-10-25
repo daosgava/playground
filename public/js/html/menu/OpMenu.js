@@ -1,11 +1,11 @@
-import { createMenuElem } from "../helpers/element-factory/menuOp.js";
+import { createMenuElem } from "../../helpers/element-factory/menuOp.js";
 import {
   DFS_ID,
   BFS_ID,
   INVERT_ID,
   INVERT_ICON,
   SEARCH_ICON,
-} from "../constants/OpMenu.js";
+} from "../../constants/OpMenu.js";
 
 export class OpMenu {
   constructor(treeInstance, appContainer) {

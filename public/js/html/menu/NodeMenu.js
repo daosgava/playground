@@ -1,6 +1,6 @@
-import { createNodeMenuElem } from "../helpers/element-factory/nodeMenu.js";
-import { MOUSE_ENTER, MOUSE_LEAVE, CLICK } from "../constants/events.js";
-import { TreeNode } from "../structures/TreeNode.js";
+import { createNodeMenuElem } from "../../helpers/element-factory/nodeMenu.js";
+import { MOUSE_ENTER, MOUSE_LEAVE, CLICK } from "../../constants/events.js";
+import { TreeNode } from "../../structures/TreeNode.js";
 
 export class NodeMenu {
   constructor() {

@@ -1,7 +1,7 @@
-import { Tree } from "./Tree.js";
-import { Node } from "./Node.js";
-import { createSubNaryTreeElem } from "../helpers/element-factory/naryTree.js";
-import { createHtmlElem } from "../helpers/element-factory/generic.js";
+import { TreeGeneric } from "../TreeGeneric.js";
+import { Node } from "../tree-node/Node.js";
+import { createSubNaryTreeElem } from "../../helpers/element-factory/naryTree.js";
+import { createHtmlElem } from "../../helpers/element-factory/generic.js";
 
 const createSubTree = (node) => {
   const { subTreeElem, rootElem, childrenContainerElem } =
@@ -13,10 +13,7 @@ const createSubTree = (node) => {
   return { subTreeElem, childrenContainerElem, nodeElem };
 };
 
-const createHLine = (children) => {
-  const first = children[0]?.nodeElem;
-  const last = children[children.length - 1]?.nodeElem;
-
+export const createHLine = ({ first, last }) => {
   if (!first || !last) return;
 
   const firstAnchor = window
@@ -35,7 +32,7 @@ const createHLine = (children) => {
   return hLine;
 };
 
-const createLimb = (nodeElem, upward = false) => {
+export const createLimb = ({ nodeElem, isUpward = false }) => {
   if (!nodeElem) return;
   const elemAnchor = window
     .getComputedStyle(nodeElem)
@@ -44,22 +41,25 @@ const createLimb = (nodeElem, upward = false) => {
   const limb = createHtmlElem({ tag: "div", classes: ["limb"] });
 
   limb.style.insetInlineStart = `anchor(${elemAnchor} center)`;
-  limb.style[upward ? "inset-block-start" : "inset-block-end"] =
+  limb.style[isUpward ? "inset-block-start" : "inset-block-end"] =
     `anchor(${elemAnchor} center)`;
 
   return limb;
 };
 
-export class NaryTree extends Tree {
+export class NaryTree extends TreeGeneric {
   constructor(root, appContainer) {
     super(root, appContainer);
   }
 
   #connectNodes(children) {
-    const hLine = createHLine(children);
+    const hLine = createHLine({
+      first: children[0]?.nodeElem,
+      last: children[children.length - 1]?.nodeElem,
+    });
     if (hLine) this.treeContainer.appendChild(hLine);
 
-    const limbs = children.map(({ nodeElem }) => createLimb(nodeElem));
+    const limbs = children.map(({ nodeElem }) => createLimb({ nodeElem }));
     limbs.forEach((limb) => this.treeContainer.appendChild(limb));
   }
 
@@ -77,7 +77,7 @@ export class NaryTree extends Tree {
     while (queue.length > 0) {
       const item = queue.shift();
 
-      const rootLimb = createLimb(item.nodeElem, true);
+      const rootLimb = createLimb({ nodeElem: item.nodeElem, isUpward: true });
       if (rootLimb && item.node.getChildren().length > 0)
         this.treeContainer.appendChild(rootLimb);
 

@@ -1,4 +1,4 @@
-import { createConnectorElem } from "../helpers/element-factory/tree.js";
+import { createConnectorElem } from "../../helpers/element-factory/tree.js";
 
 export class Connector {
   constructor(parent, current, isLeft) {
