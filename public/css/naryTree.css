@@ -1,11 +1,4 @@
 #nary-tree-container {
-    align-items: center;
-    border: var(--dark-border);
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-
     .node-container {
         align-items: center;
         display: flex;

@@ -8,7 +8,7 @@ const loadStyles = () => {
     "./css/nodeMenu.css",
     "./css/node.css",
     "./css/connector.css",
-    "./css/menu.css",
+    "./css/opMenu.css",
     "./css/naryTree.css",
   ];
   styles.forEach((url) =>

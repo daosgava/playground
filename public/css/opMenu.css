@@ -11,14 +11,14 @@
     width: fit-content;
 
     select {
-        border: 0.1rem solid var(--dark-color);
+        border: var(--dark-border);
         background-color: none;
         border-radius: 0.4rem;
         outline: none;
     }
 
     input {
-        border: 0.1rem solid var(--dark-color);
+        border: var(--dark-border);
         border-radius: 0.4rem;
         padding: 0.5rem;
 
@@ -28,7 +28,7 @@
     }
 
     button {
-        border: 0.1rem solid var(--dark-color);
+        border: var(--dark-border);
         background-color: none;
         border-radius: 5rem;
         height: 2rem;

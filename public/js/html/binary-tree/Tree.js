@@ -4,6 +4,7 @@ import { NodeMenu } from "../menu/NodeMenu.js";
 import { Node } from "../tree-node/Node.js";
 import { Connector } from "./Connector.js";
 import { TreeGeneric } from "../TreeGeneric.js";
+import { SubTree } from "./SubTree.js";
 
 export class Tree extends TreeGeneric {
   constructor(root, appContainer) {
@@ -48,18 +49,6 @@ export class Tree extends TreeGeneric {
     this.treeContainer.appendChild(connectorElem);
   }
 
-  #createSubTree(currentNode) {
-    // Create HTML Node
-    const htmlNode = new Node(currentNode, this.nodeMenu);
-    const { nodeElem } = htmlNode.getElements();
-
-    // Create Subtree
-    const { subTreeElem, rootElem, leftElem, rightElem } = createSubTreeElem();
-    rootElem.appendChild(nodeElem);
-
-    return { subTreeElem, leftElem, rightElem, nodeElem };
-  }
-
   // Based on Depth-First
   draw({ container, node, isChild, parentNode, isLeft } = {}) {
     const currentNode = isChild ? node : this.root;
@@ -67,8 +56,9 @@ export class Tree extends TreeGeneric {
 
     if (currentNode?.value === undefined) return;
 
+    const subTree = new SubTree(currentNode);
     const { nodeElem, leftElem, rightElem, subTreeElem } =
-      this.#createSubTree(currentNode);
+      subTree.getElements();
     currentContainer.appendChild(subTreeElem);
 
     // Connect Nodes

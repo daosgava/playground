@@ -1,11 +1,17 @@
-#tree-container {
+.title {
+    color: var(--dark-color);
+}
+
+.tree {
     align-items: center;
     border: var(--dark-border);
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
     padding: 1rem;
+}
 
+#tree-container {
     .root {
         display: flex;
         width: 100%;

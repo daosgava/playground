@@ -12,14 +12,14 @@ const initializeTree = () => {
   const treeContainer = createHtmlElem({
     tag: "div",
     id: "tree-container",
-    classes: [],
+    classes: ["tree"],
   });
-  const titleElem = createHtmlElem({
+  const title = createHtmlElem({
     tag: "h3",
-    classes: [],
+    classes: ["title"],
     innerText: "Binary Tree",
   });
-  treeContainer.appendChild(titleElem);
+  treeContainer.appendChild(title);
   appContainer.appendChild(treeContainer);
 
   const root = new TreeNode(1);
@@ -50,14 +50,14 @@ const initializeNaryTree = () => {
   const naryTreeContainer = createHtmlElem({
     tag: "div",
     id: "nary-tree-container",
-    classes: [],
+    classes: ["tree"],
   });
-  const titleElem = createHtmlElem({
+  const title = createHtmlElem({
     tag: "h3",
-    classes: [],
+    classes: ["title"],
     innerText: "Nary Tree",
   });
-  naryTreeContainer.appendChild(titleElem);
+  naryTreeContainer.appendChild(title);
   appContainer.appendChild(naryTreeContainer);
 
   const root = new NaryTreeNode(1);
