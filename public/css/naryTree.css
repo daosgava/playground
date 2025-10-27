@@ -1,11 +1,17 @@
 #nary-tree-container {
+    align-items: center;
+    border: var(--dark-border);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
     .node-container {
         align-items: center;
         display: flex;
         flex-direction: column;
         height: fit-content;
-        gap: 1rem;
-        margin-top: 0.5rem;
+        gap: 1.5rem;
         width: fit-content;
     }
 

@@ -1,28 +1,20 @@
-class SubTree {
-  contructor(rootNode) {
+import { createSubNaryTreeElem } from "../../helpers/element-factory/naryTree.js";
+import { Node } from "../tree-node/Node.js";
+
+export class SubTree {
+  constructor(rootNode) {
     this.rootNode = rootNode;
+    this.#createSubtreeElem();
   }
 
-  #createSubtree() {
+  #createSubtreeElem() {
     const { subTreeElem, rootElem, childrenContainerElem } =
-      createSubNaryTreeElem();
+      createSubNaryTreeElem(this.rootNode);
     const htmlNode = new Node(this.rootNode);
     const { nodeElem } = htmlNode.getElements();
     rootElem.appendChild(nodeElem);
 
     this.html = { subTreeElem, childrenContainerElem, nodeElem };
-  }
-
-  #createSubTree(currentNode) {
-    // Create HTML Node
-    const htmlNode = new Node(currentNode, this.nodeMenu);
-    const { nodeElem } = htmlNode.getElements();
-
-    // Create Subtree
-    const { subTreeElem, rootElem, leftElem, rightElem } = createSubTreeElem();
-    rootElem.appendChild(nodeElem);
-
-    return { subTreeElem, leftElem, rightElem, nodeElem };
   }
 
   getElements() {
