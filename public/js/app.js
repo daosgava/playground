@@ -43,7 +43,9 @@ const initializeBinaryTree = () => {
 };
 
 const initializeOpMenu = (treeInstance) => {
-  new OpMenu(treeInstance, appContainer);
+  const opMenu = new OpMenu(treeInstance);
+  const { menuElem } = opMenu.getElements();
+  appContainer.appendChild(menuElem);
 };
 
 const initializeNaryTree = () => {
@@ -91,7 +93,7 @@ const initializeNaryTree = () => {
 const app = () => {
   const binaryTreeInstance = initializeBinaryTree();
   const naryTreeInstance = initializeNaryTree();
-  initializeOpMenu(binaryTreeInstance);
+  initializeOpMenu([binaryTreeInstance, naryTreeInstance]);
 };
 
 app();

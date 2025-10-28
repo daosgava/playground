@@ -85,7 +85,6 @@ export class TreeGeneric {
 
     while (queue.length > 0) {
       const node = queue.shift();
-
       const foundElement = document.querySelector(`#node-${node.id}`);
 
       if (node.value === target || node.value === Number(target)) {

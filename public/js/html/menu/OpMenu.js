@@ -8,22 +8,15 @@ import {
 } from "../../constants/OpMenu.js";
 
 export class OpMenu {
-  constructor(treeInstance, appContainer) {
-    this.appContainer = appContainer;
+  constructor(treeInstance) {
     this.treeInstance = treeInstance;
     this.operation = DFS_ID;
     this.#createMenu();
     this.#attachHandlers();
-    this.#addToPage();
   }
 
   #createMenu() {
     this.elements = createMenuElem();
-  }
-
-  #addToPage() {
-    const { containerElem } = this.getElements();
-    this.appContainer.appendChild(containerElem);
   }
 
   getElements() {
@@ -49,13 +42,15 @@ export class OpMenu {
   #handleClickButton() {
     const { buttonElem, inputElem } = this.getElements();
     buttonElem.addEventListener("click", () => {
-      if (this.operation === DFS_ID) {
-        this.treeInstance.dfs(this.treeInstance.root, inputElem.value);
-      } else if (this.operation === BFS_ID) {
-        this.treeInstance.bfs(this.treeInstance.root, inputElem.value);
-      } else if (this.operation === INVERT_ID) {
-        this.treeInstance.invert(this.treeInstance.root);
-      }
+      this.treeInstance.forEach((tree) => {
+        if (this.operation === DFS_ID) {
+          tree.dfs(tree.root, inputElem.value);
+        } else if (this.operation === BFS_ID) {
+          tree.bfs(tree.root, inputElem.value);
+        } else if (this.operation === INVERT_ID) {
+          tree.invert(tree.root);
+        }
+      });
     });
   }
 }

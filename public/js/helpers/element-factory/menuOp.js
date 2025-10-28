@@ -6,7 +6,7 @@ import {
 import { OPTIONS, SEARCH_ICON } from "../../constants/OpMenu.js";
 
 export const createMenuElem = () => {
-  const containerElem = createHtmlElem({ tag: "div", id: "menu" });
+  const menuElem = createHtmlElem({ tag: "div", id: "menu" });
   const { selectElem } = createSelectElem({
     id: "operation",
     options: OPTIONS,
@@ -22,12 +22,12 @@ export const createMenuElem = () => {
     innerText: SEARCH_ICON,
   });
 
-  containerElem.appendChild(selectElem);
-  containerElem.appendChild(inputElem);
-  containerElem.appendChild(buttonElem);
+  menuElem.appendChild(selectElem);
+  menuElem.appendChild(inputElem);
+  menuElem.appendChild(buttonElem);
 
   return {
-    containerElem,
+    menuElem,
     inputElem,
     buttonElem,
     selectElem,
