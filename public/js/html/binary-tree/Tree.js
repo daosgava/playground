@@ -27,27 +27,6 @@ export class Tree extends TreeGeneric {
     treeElem.appendChild(menuElem);
   }
 
-  async dfs(node, target) {
-    if (node?.value === undefined) {
-      return false;
-    }
-
-    const foundElement = document.querySelector(`#node-${node.id}`);
-
-    if (node.value === target || node.value === Number(target)) {
-      foundElement.classList.add("found");
-    }
-
-    foundElement.classList.toggle("highlight");
-    await wait(0.4);
-    foundElement.classList.toggle("highlight");
-
-    return (
-      (await this.dfs(node?.left, target)) ||
-      (await this.dfs(node?.right, target))
-    );
-  }
-
   invert() {
     this.invertTree();
     this.resetTree();

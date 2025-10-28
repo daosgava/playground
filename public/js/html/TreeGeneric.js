@@ -80,6 +80,28 @@ export class TreeGeneric {
     this.draw();
   }
 
+  async dfs(node, target) {
+    if (node?.value === undefined) {
+      return;
+    }
+
+    const foundElement = document.querySelector(`#node-${node.id}`);
+
+    if (node.value === target || node.value === Number(target)) {
+      foundElement.classList.add("found");
+    }
+
+    foundElement.classList.toggle("highlight");
+    await wait(0.4);
+    foundElement.classList.toggle("highlight");
+
+    const children = node.getChildren();
+
+    for (const child of children) {
+      await this.dfs(child, target);
+    }
+  }
+
   async bfs(node, target) {
     const queue = [node];
 
