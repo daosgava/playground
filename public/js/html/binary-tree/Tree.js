@@ -1,24 +1,9 @@
-import { createSubTreeElem } from "../../helpers/element-factory/tree.js";
-import { wait } from "../../helpers/timers.js";
 import { NodeMenu } from "../menu/NodeMenu.js";
-import { Node } from "../tree-node/Node.js";
-import { Connector } from "./Connector.js";
 import { TreeGeneric } from "../TreeGeneric.js";
-import { SubTree } from "./SubTree.js";
 
 export class Tree extends TreeGeneric {
   constructor(root, appContainer) {
     super(root, appContainer);
-    this.#initNodeMenu();
-  }
-
-  resetTree() {
-    this.#resetRootContainer();
-    this.draw();
-  }
-
-  #resetRootContainer() {
-    this.treeContainer.replaceChildren();
     this.#initNodeMenu();
   }
 
@@ -38,48 +23,8 @@ export class Tree extends TreeGeneric {
     this.nodeMenu.setClickRight(addNodeHandler);
 
     const { menuElem } = this.nodeMenu.getElements();
-    this.treeContainer.appendChild(menuElem);
-  }
-
-  #connectNodes(parentNode, currentNode, isLeft) {
-    if (!parentNode || !currentNode) return;
-    const connector = new Connector(parentNode, currentNode, isLeft);
-    const { connectorElem } = connector.getElements();
-
-    this.treeContainer.appendChild(connectorElem);
-  }
-
-  // Based on Depth-First
-  draw({ container, node, isChild, parentNode, isLeft } = {}) {
-    const currentNode = isChild ? node : this.root;
-    const currentContainer = isChild ? container : this.treeContainer;
-
-    if (currentNode?.value === undefined) return;
-
-    const subTree = new SubTree(currentNode);
-    const { nodeElem, leftElem, rightElem, subTreeElem } =
-      subTree.getElements();
-    currentContainer.appendChild(subTreeElem);
-
-    // Connect Nodes
-    this.#connectNodes(parentNode, nodeElem, isLeft);
-
-    return (
-      this.draw({
-        container: leftElem,
-        node: currentNode.left,
-        isChild: true,
-        parentNode: nodeElem,
-        isLeft: true,
-      }) ||
-      this.draw({
-        container: rightElem,
-        node: currentNode.right,
-        isChild: true,
-        parentNode: nodeElem,
-        isLeft: false,
-      })
-    );
+    const { treeElem } = this.getElements();
+    treeElem.appendChild(menuElem);
   }
 
   async dfs(node, target) {
@@ -103,27 +48,6 @@ export class Tree extends TreeGeneric {
     );
   }
 
-  async bfs(node, target) {
-    const queue = [node];
-
-    while (queue.length > 0) {
-      const node = queue.shift();
-
-      const foundElement = document.querySelector(`#node-${node.id}`);
-
-      if (node.value === target || node.value === Number(target)) {
-        foundElement.classList.add("found");
-      }
-
-      foundElement.classList.toggle("highlight");
-      await wait(0.4);
-      foundElement.classList.toggle("highlight");
-
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    }
-  }
-
   invert() {
     this.invertTree();
     this.resetTree();
@@ -141,5 +65,10 @@ export class Tree extends TreeGeneric {
       this.invertTree(currentNode.left, true) ||
       this.invertTree(currentNode.right, true)
     );
+  }
+
+  resetTree() {
+    super.resetTree();
+    this.#initNodeMenu();
   }
 }

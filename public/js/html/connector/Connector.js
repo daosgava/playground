@@ -1,6 +1,9 @@
 import { createHtmlElem } from "../../helpers/element-factory/generic.js";
 
 export class Connector {
+  #hLine = undefined;
+  #limbs = undefined;
+
   constructor(children) {
     this.children = children;
     const firstChild = children[0]?.getElements()?.nodeElem;
@@ -24,11 +27,11 @@ export class Connector {
     hLine.style.insetInlineStart = `anchor(${firstAnchor} center)`;
     hLine.style.insetInlineEnd = `anchor(${lastAnchor} center)`;
     hLine.style.insetBlockEnd = `anchor(${firstAnchor} top)`;
-    this.hLine = hLine;
+    this.#hLine = hLine;
   }
 
   #connectChildren() {
-    this.limbs = this.children.map((subTree) => Connector.createLimb(subTree));
+    this.#limbs = this.children.map((subTree) => Connector.createLimb(subTree));
   }
 
   static createLimb(subTree, isUpward = false) {
@@ -47,6 +50,6 @@ export class Connector {
   }
 
   getElements() {
-    return { hLine: this.hLine, limbs: this.limbs };
+    return { hLine: this.#hLine, limbs: this.#limbs };
   }
 }

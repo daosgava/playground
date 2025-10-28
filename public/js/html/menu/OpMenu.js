@@ -49,7 +49,6 @@ export class OpMenu {
   #handleClickButton() {
     const { buttonElem, inputElem } = this.getElements();
     buttonElem.addEventListener("click", () => {
-      this.treeInstance.resetTree();
       if (this.operation === DFS_ID) {
         this.treeInstance.dfs(this.treeInstance.root, inputElem.value);
       } else if (this.operation === BFS_ID) {

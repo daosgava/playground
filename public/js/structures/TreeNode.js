@@ -5,4 +5,18 @@ export class TreeNode {
     this.left = null;
     this.right = null;
   }
+
+  getChildren() {
+    const children = [];
+
+    if (this.left) {
+      children.push(this.left);
+    }
+
+    if (this.right) {
+      children.push(this.right);
+    }
+
+    return children;
+  }
 }

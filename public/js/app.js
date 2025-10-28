@@ -8,11 +8,11 @@ import { createHtmlElem } from "./helpers/element-factory/generic.js";
 
 const appContainer = document.querySelector(APP_ID);
 
-const initializeTree = () => {
+const initializeBinaryTree = () => {
   const treeContainer = createHtmlElem({
     tag: "div",
-    id: "tree-container",
-    classes: ["tree"],
+    id: "binary-tree-container",
+    classes: ["tree-container"],
   });
   const title = createHtmlElem({
     tag: "h3",
@@ -36,10 +36,10 @@ const initializeTree = () => {
   root.left.left.left = new TreeNode(8);
   root.left.left.right = new TreeNode(9);
 
-  const htmlTree = new Tree(root, treeContainer);
-  htmlTree.draw();
+  const binaryTree = new Tree(root, treeContainer);
+  binaryTree.draw();
 
-  return htmlTree;
+  return binaryTree;
 };
 
 const initializeOpMenu = (treeInstance) => {
@@ -50,7 +50,7 @@ const initializeNaryTree = () => {
   const naryTreeContainer = createHtmlElem({
     tag: "div",
     id: "nary-tree-container",
-    classes: ["tree"],
+    classes: ["tree-container"],
   });
   const title = createHtmlElem({
     tag: "h3",
@@ -84,13 +84,14 @@ const initializeNaryTree = () => {
 
   const naryTree = new NaryTree(root, naryTreeContainer);
   naryTree.draw();
+
+  return naryTree;
 };
 
 const app = () => {
-  const treeInstance = initializeTree();
-  initializeOpMenu(treeInstance);
-
-  initializeNaryTree();
+  const binaryTreeInstance = initializeBinaryTree();
+  const naryTreeInstance = initializeNaryTree();
+  initializeOpMenu(binaryTreeInstance);
 };
 
 app();

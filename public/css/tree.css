@@ -2,7 +2,7 @@
     color: var(--dark-color);
 }
 
-.tree {
+.tree-container {
     align-items: center;
     border: var(--dark-border);
     border-radius: 1rem;
@@ -11,20 +11,42 @@
     padding: 1rem;
 }
 
-#tree-container {
-    .root {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-    }
+.node-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    gap: 1.5rem;
+    width: fit-content;
+}
 
-    .children-container {
-        display: flex;
-        flex-direction: row;
-    }
+.root {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
 
-    .child {
-        display: flex;
-        min-width: 2rem;
-    }
+.children-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.child {
+    display: flex;
+    min-width: 2rem;
+}
+
+.hLine {
+    background-color: var(--branch-color);
+    height: 0.2rem;
+    margin-bottom: 0.6rem;
+    position: absolute;
+}
+
+.limb {
+    background-color: var(--branch-color);
+    height: 2.05rem;
+    width: 0.2rem;
+    position: absolute;
 }

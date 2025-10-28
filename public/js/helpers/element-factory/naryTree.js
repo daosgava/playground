@@ -17,6 +17,7 @@ export const createSubNaryTreeElem = (node) => {
   });
 
   subTreeElem.appendChild(rootElem);
+
   if (node.getChildren().length > 0) {
     subTreeElem.appendChild(childrenContainerElem);
   }
