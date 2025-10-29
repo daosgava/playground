@@ -14,7 +14,7 @@ export const createMenuElem = () => {
   const inputElem = createInputElem({
     id: "target",
     value: "",
-    placeholder: "Search Node",
+    placeholder: "Type a value",
   });
   const buttonElem = createHtmlElem({
     tag: "button",

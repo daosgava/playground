@@ -40,6 +40,11 @@ const initializeBinaryTree = () => {
   b.setLeft(f);
   b.setRight(g);
 
+  const h = new TreeNode(8);
+  const i = new TreeNode(9);
+  f.setLeft(h);
+  f.setRight(i);
+
   const binaryTree = new Tree(root, treeContainer);
   binaryTree.draw();
 

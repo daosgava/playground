@@ -6,7 +6,7 @@ export const INVERT_ID = "invert";
 export const INVERT_LABEL = "Invert";
 
 export const SEARCH_ICON = "🔍";
-export const INVERT_ICON = "🔄";
+export const INVERT_ICON = "🙃";
 
 export const OPTIONS = [
   { id: DFS_ID, value: DFS_ID, text: DFS_LABEL },
