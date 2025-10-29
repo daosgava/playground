@@ -43,12 +43,13 @@ export class OpMenu {
     const { buttonElem, inputElem } = this.getElements();
     buttonElem.addEventListener("click", () => {
       this.treeInstance.forEach((tree) => {
+        tree.resetTree();
         if (this.operation === DFS_ID) {
           tree.dfs(tree.root, inputElem.value);
         } else if (this.operation === BFS_ID) {
           tree.bfs(tree.root, inputElem.value);
         } else if (this.operation === INVERT_ID) {
-          tree.invert(tree.root);
+          tree.invert();
         }
       });
     });

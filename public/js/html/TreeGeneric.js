@@ -120,4 +120,31 @@ export class TreeGeneric {
       queue.push(...node.getChildren());
     }
   }
+
+  invert() {
+    this.invertTree();
+    this.resetTree();
+  }
+
+  invertTree(node, isChild) {
+    const currentNode = isChild ? node : this.root;
+    if (!currentNode?.value) return;
+
+    const children = currentNode.getChildren();
+
+    let ptr1 = 0;
+    let ptr2 = children.length - 1;
+    while (ptr1 < ptr2) {
+      const temp = children[ptr1];
+      children[ptr1] = children[ptr2];
+      children[ptr2] = temp;
+
+      ptr1++;
+      ptr2--;
+    }
+
+    for (const child of [...children]) {
+      this.invertTree(child, true);
+    }
+  }
 }

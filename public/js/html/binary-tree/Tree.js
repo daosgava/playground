@@ -2,14 +2,14 @@ import { NodeMenu } from "../menu/NodeMenu.js";
 import { TreeGeneric } from "../TreeGeneric.js";
 
 export class Tree extends TreeGeneric {
-  constructor(root, appContainer) {
-    super(root, appContainer);
+  constructor(root, container) {
+    super(root, container);
     this.#initNodeMenu();
   }
 
   #initNodeMenu() {
-    this.nodeMenu = new NodeMenu();
-    this.nodeMenu.setClickDelete(() => {
+    const nodeMenu = new NodeMenu();
+    nodeMenu.setClickDelete(() => {
       this.resetTree();
     });
 
@@ -19,35 +19,10 @@ export class Tree extends TreeGeneric {
       newNodeElem.focus();
     };
 
-    this.nodeMenu.setClickLeft(addNodeHandler);
-    this.nodeMenu.setClickRight(addNodeHandler);
+    nodeMenu.setClickLeft(addNodeHandler);
+    nodeMenu.setClickRight(addNodeHandler);
 
-    const { menuElem } = this.nodeMenu.getElements();
-    const { treeElem } = this.getElements();
-    treeElem.appendChild(menuElem);
-  }
-
-  invert() {
-    this.invertTree();
-    this.resetTree();
-  }
-
-  invertTree(node, isChild) {
-    const currentNode = isChild ? node : this.root;
-    if (!currentNode?.value) return false;
-
-    const temp = currentNode.left;
-    currentNode.left = currentNode.right;
-    currentNode.right = temp;
-
-    return (
-      this.invertTree(currentNode.left, true) ||
-      this.invertTree(currentNode.right, true)
-    );
-  }
-
-  resetTree() {
-    super.resetTree();
-    this.#initNodeMenu();
+    const { menuElem } = nodeMenu.getElements();
+    this.container.appendChild(menuElem);
   }
 }

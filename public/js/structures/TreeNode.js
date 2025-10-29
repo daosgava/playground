@@ -1,22 +1,19 @@
 export class TreeNode {
+  #children = [];
   constructor(value) {
     this.id = window.crypto.randomUUID();
     this.value = value;
-    this.left = null;
-    this.right = null;
+  }
+
+  setLeft(val) {
+    this.#children[0] = val;
+  }
+
+  setRight(val) {
+    this.#children[1] = val;
   }
 
   getChildren() {
-    const children = [];
-
-    if (this.left) {
-      children.push(this.left);
-    }
-
-    if (this.right) {
-      children.push(this.right);
-    }
-
-    return children;
+    return this.#children;
   }
 }
