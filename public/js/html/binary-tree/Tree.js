@@ -8,8 +8,8 @@ export class Tree extends TreeGeneric {
   }
 
   #initNodeMenu() {
-    const nodeMenu = new NodeMenu();
-    nodeMenu.setClickDelete(() => {
+    this.nodeMenu = new NodeMenu();
+    this.nodeMenu.setClickDelete(() => {
       this.resetTree();
     });
 
@@ -19,10 +19,10 @@ export class Tree extends TreeGeneric {
       newNodeElem.focus();
     };
 
-    nodeMenu.setClickLeft(addNodeHandler);
-    nodeMenu.setClickRight(addNodeHandler);
+    this.nodeMenu.setClickLeft(addNodeHandler);
+    this.nodeMenu.setClickRight(addNodeHandler);
 
-    const { menuElem } = nodeMenu.getElements();
+    const { menuElem } = this.nodeMenu.getElements();
     this.container.appendChild(menuElem);
   }
 }

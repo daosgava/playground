@@ -8,9 +8,10 @@ import {
 } from "../../constants/OpMenu.js";
 
 export class OpMenu {
-  constructor(treeInstance) {
-    this.treeInstance = treeInstance;
-    this.operation = DFS_ID;
+  #treeInstances = [];
+  #operation = DFS_ID;
+  constructor(arrInstances) {
+    this.#treeInstances = arrInstances;
     this.#createMenu();
     this.#attachHandlers();
   }
@@ -31,24 +32,25 @@ export class OpMenu {
   #handleSelectOperation() {
     const { selectElem, inputElem, buttonElem } = this.getElements();
     selectElem.addEventListener("change", (event) => {
-      this.operation = event.target.value;
+      this.#operation = event.target.value;
 
-      inputElem.style.display = this.operation === INVERT_ID ? "none" : "block";
+      inputElem.style.display =
+        this.#operation === INVERT_ID ? "none" : "block";
       buttonElem.innerText =
-        this.operation === INVERT_ID ? INVERT_ICON : SEARCH_ICON;
+        this.#operation === INVERT_ID ? INVERT_ICON : SEARCH_ICON;
     });
   }
 
   #handleClickButton() {
     const { buttonElem, inputElem } = this.getElements();
     buttonElem.addEventListener("click", () => {
-      this.treeInstance.forEach((tree) => {
+      this.#treeInstances.forEach((tree) => {
         tree.resetTree();
-        if (this.operation === DFS_ID) {
+        if (this.#operation === DFS_ID) {
           tree.dfs(tree.root, inputElem.value);
-        } else if (this.operation === BFS_ID) {
+        } else if (this.#operation === BFS_ID) {
           tree.bfs(tree.root, inputElem.value);
-        } else if (this.operation === INVERT_ID) {
+        } else if (this.#operation === INVERT_ID) {
           tree.invert();
         }
       });

@@ -13,6 +13,10 @@ export class TreeNode {
     this.#children[1] = val;
   }
 
+  removeChildren() {
+    this.#children = [];
+  }
+
   getChildren() {
     return this.#children;
   }

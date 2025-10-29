@@ -45,6 +45,12 @@ export class TreeGeneric {
     limbs.forEach((limb) => this.container.appendChild(limb));
   }
 
+  #attachMenu(node) {
+    if (this.nodeMenu) {
+      node.setMenu(this.nodeMenu);
+    }
+  }
+
   // Based on Breadth-First
   draw() {
     const subTree = new SubTree(this.root);
@@ -59,14 +65,19 @@ export class TreeGeneric {
       const subTree = queue.shift();
       const { childrenContainerElem: parentContainer } = subTree.getElements();
 
-      const children = subTree.rootNode.getChildren().map((child) => {
-        const subTree = new SubTree(child);
+      const rootNode = subTree.getRoot();
 
-        const { subTreeElem } = subTree.getElements();
-        parentContainer.appendChild(subTreeElem);
+      const children = rootNode
+        .getModel()
+        .getChildren()
+        .map((child) => {
+          const subTree = new SubTree(child);
 
-        return subTree;
-      });
+          const { subTreeElem } = subTree.getElements();
+          parentContainer.appendChild(subTreeElem);
+
+          return subTree;
+        });
 
       this.#connectNodes(subTree, children);
 

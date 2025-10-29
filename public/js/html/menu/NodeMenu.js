@@ -3,15 +3,20 @@ import { MOUSE_ENTER, MOUSE_LEAVE, CLICK } from "../../constants/events.js";
 import { TreeNode } from "../../structures/TreeNode.js";
 
 export class NodeMenu {
+  #html = undefined;
+  #selectedNode = undefined;
   constructor() {
-    this.html = createNodeMenuElem();
-    this.selectedNode = undefined;
+    this.#html = createNodeMenuElem();
     this.#attachHandlers();
     this.#showAddButtons();
   }
 
+  setSelected(node) {
+    this.#selectedNode = node;
+  }
+
   getElements() {
-    return this.html;
+    return this.#html;
   }
 
   setX(x) {
@@ -60,9 +65,7 @@ export class NodeMenu {
   setClickDelete(cb) {
     const { deleteButtonElem } = this.getElements();
     deleteButtonElem.addEventListener(CLICK, () => {
-      delete this.selectedNode.value;
-      delete this.selectedNode.right;
-      delete this.selectedNode.left;
+      this.#selectedNode.value = undefined;
       cb?.();
     });
   }
@@ -70,24 +73,24 @@ export class NodeMenu {
   setClickLeft(cb) {
     const { leftButtonElem } = this.getElements();
     leftButtonElem.addEventListener(CLICK, () => {
-      this.selectedNode.left = new TreeNode("");
-      cb?.(this.selectedNode.left);
+      this.#selectedNode.left = new TreeNode("");
+      cb?.(this.#selectedNode.left);
     });
   }
 
   setClickRight(cb) {
     const { rightButtonElem } = this.getElements();
     rightButtonElem.addEventListener(CLICK, () => {
-      this.selectedNode.right = new TreeNode("");
-      cb?.(this.selectedNode.right);
+      this.#selectedNode.right = new TreeNode("");
+      cb?.(this.#selectedNode.right);
     });
   }
 
   #showAddButtons() {
     const { rightButtonElem, leftButtonElem } = this.getElements();
     rightButtonElem.style.opacity =
-      this.selectedNode?.right?.value !== undefined ? 0 : 1;
+      this.#selectedNode?.right?.value !== undefined ? 0 : 1;
     leftButtonElem.style.opacity =
-      this.selectedNode?.left?.value !== undefined ? 0 : 1;
+      this.#selectedNode?.left?.value !== undefined ? 0 : 1;
   }
 }

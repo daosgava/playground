@@ -3,9 +3,10 @@ import { createHtmlElem } from "../../helpers/element-factory/generic.js";
 export class Connector {
   #hLine = undefined;
   #limbs = undefined;
+  #children = undefined;
 
   constructor(children) {
-    this.children = children;
+    this.#children = children;
     const firstChild = children[0]?.getElements()?.nodeElem;
     const lastChild = children[children.length - 1]?.getElements()?.nodeElem;
     this.#createHLine(firstChild, lastChild);
@@ -31,7 +32,9 @@ export class Connector {
   }
 
   #connectChildren() {
-    this.#limbs = this.children.map((subTree) => Connector.createLimb(subTree));
+    this.#limbs = this.#children.map((subTree) =>
+      Connector.createLimb(subTree),
+    );
   }
 
   static createLimb(subTree, isUpward = false) {

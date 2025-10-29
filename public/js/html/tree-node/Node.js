@@ -7,24 +7,29 @@ import {
 } from "../../constants/events.js";
 
 export class Node {
-  constructor(node, nodeMenu) {
-    this.node = node;
-    this.nodeMenu = nodeMenu;
-    this.html = undefined;
+  #model = undefined;
+  #html = undefined;
+  constructor(node) {
+    this.#model = node;
     this.#createNode();
   }
 
-  #createNode() {
-    this.html = createNodeElem(this.node);
+  getModel() {
+    return this.#model;
+  }
 
+  #createNode() {
+    this.#html = createNodeElem(this.#model);
     this.#attachHandlers();
-    if (this.nodeMenu) {
-      this.#attachMenu();
-    }
+  }
+
+  setMenu(nodeMenu) {
+    this.nodeMenu = nodeMenu;
+    this.#attachMenu();
   }
 
   getElements() {
-    return this.html;
+    return this.#html;
   }
 
   #attachHandlers() {
@@ -37,7 +42,7 @@ export class Node {
     nodeElem.addEventListener(MOUSE_ENTER, () => {
       const { top, left } = nodeElem.getBoundingClientRect();
 
-      this.nodeMenu.selectedNode = this.node;
+      this.nodeMenu.setSelected(this.#model);
       this.nodeMenu.setY(top);
       this.nodeMenu.setX(left);
       this.nodeMenu.show();
@@ -60,6 +65,6 @@ export class Node {
   }
 
   #editNode(newVal) {
-    this.node.value = newVal;
+    this.#model.value = newVal;
   }
 }

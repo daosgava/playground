@@ -1,6 +1,6 @@
 import { createHtmlElem } from "./tree.js";
 
-export const createSubNaryTreeElem = (node) => {
+export const createSubNaryTreeElem = (hasChildren) => {
   const subTreeElem = createHtmlElem({
     tag: "div",
     classes: ["node-container"],
@@ -18,7 +18,7 @@ export const createSubNaryTreeElem = (node) => {
 
   subTreeElem.appendChild(rootElem);
 
-  if (node.getChildren().length > 0) {
+  if (hasChildren) {
     subTreeElem.appendChild(childrenContainerElem);
   }
 
