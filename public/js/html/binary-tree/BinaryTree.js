@@ -2,7 +2,7 @@ import { TreeGeneric } from "../TreeGeneric.js";
 import { NodeMenu } from "../menu/NodeMenu.js";
 import { BinaryNode } from "../../structures/BinaryNode.js";
 
-export class Tree extends TreeGeneric {
+export class BinaryTree extends TreeGeneric {
   constructor(root, container) {
     super(root, container);
     this.#initNodeMenu();

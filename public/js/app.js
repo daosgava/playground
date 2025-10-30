@@ -1,6 +1,6 @@
 import { BinaryNode } from "./structures/BinaryNode.js";
 import { NaryNode } from "./structures/NaryNode.js";
-import { Tree } from "./html/binary-tree/Tree.js";
+import { BinaryTree } from "./html/binary-tree/BinaryTree.js";
 import { NaryTree } from "./html/nary-tree/NaryTree.js";
 import { OpMenu } from "./html/menu/OpMenu.js";
 import { APP_ID } from "./constants/app.js";
@@ -45,7 +45,7 @@ const initializeBinaryTree = () => {
   f.setLeft(h);
   f.setRight(i);
 
-  const binaryTree = new Tree(root, treeContainer);
+  const binaryTree = new BinaryTree(root, treeContainer);
   binaryTree.draw();
 
   return binaryTree;

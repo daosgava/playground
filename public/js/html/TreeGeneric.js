@@ -59,6 +59,7 @@ export class TreeGeneric {
 
     while (queue.length > 0) {
       const subTree = queue.shift();
+      if (!subTree) continue;
       const { childrenContainerElem: parentContainer } = subTree.getElements();
 
       const rootNode = subTree.getRoot();
