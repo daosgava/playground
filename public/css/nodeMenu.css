@@ -1,8 +1,7 @@
 .node-menu {
     display: flex;
     height: fit-content;
-    gap: 0.5rem;
-    transform: translate(-0.35rem, 2rem);
+    justify-content: center;
     opacity: 0;
     padding: 0.5rem;
     position: absolute;
@@ -12,8 +11,6 @@
         display: flex;
         cursor: pointer;
         color: var(--leaf-color);
-        width: 0.5rem;
-        height: 0.5rem;
         transition: all 0.2s;
 
         &:hover {
@@ -23,7 +20,8 @@
         .arrow {
             border: var(--dark-border);
             border-bottom: none;
-            width: 0.5rem;
+            height: 0.4rem;
+            width: 0.4rem;
         }
 
         .right {
@@ -41,5 +39,27 @@
             border-right: none;
             width: 1rem;
         }
+    }
+}
+
+.binary {
+    gap: 0.5rem;
+    transform: translate(-0.7rem, 2rem);
+    width: 3rem;
+}
+
+.nary {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    transform: translate(0.3rem, 2rem);
+    width: 1rem;
+
+    .add {
+        color: var(--dark-color);
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 1rem;
     }
 }

@@ -49,4 +49,5 @@
     height: 2.05rem;
     width: 0.2rem;
     position: absolute;
+    transform: translateX(-50%);
 }

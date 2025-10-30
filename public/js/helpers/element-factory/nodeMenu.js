@@ -1,7 +1,10 @@
 import { createHtmlElem } from "./generic.js";
 
 export const createNodeMenuElem = () => {
-  const menuElem = createHtmlElem({ tag: "div", classes: ["node-menu"] });
+  const menuElem = createHtmlElem({
+    tag: "div",
+    classes: ["node-menu", "binary"],
+  });
   const leftButtonElem = createHtmlElem({ tag: "div", classes: ["button"] });
   const deleteButtonElem = createHtmlElem({
     tag: "div",
@@ -34,4 +37,39 @@ export const createNodeMenuElem = () => {
   menuElem.appendChild(rightButtonElem);
 
   return { menuElem, leftButtonElem, rightButtonElem, deleteButtonElem };
+};
+
+export const createNaryNodeMenuElem = () => {
+  const menuElem = createHtmlElem({
+    tag: "div",
+    classes: ["node-menu", "nary"],
+  });
+
+  const deleteButtonElem = createHtmlElem({
+    tag: "div",
+    classes: ["button"],
+  });
+  const deleteArrowElem = createHtmlElem({
+    tag: "div",
+    classes: ["arrow", "delete"],
+  });
+
+  deleteButtonElem.appendChild(deleteArrowElem);
+
+  const addChildButtonElem = createHtmlElem({
+    tag: "div",
+    classes: ["button"],
+  });
+  const addChildIcon = createHtmlElem({
+    tag: "div",
+    classes: ["add"],
+    innerText: "+",
+  });
+
+  addChildButtonElem.appendChild(addChildIcon);
+
+  menuElem.appendChild(deleteButtonElem);
+  menuElem.appendChild(addChildButtonElem);
+
+  return { menuElem, addChildButtonElem, deleteButtonElem };
 };
