@@ -1,13 +1,11 @@
-import { createNodeMenuElem } from "../../helpers/element-factory/nodeMenu.js";
 import { MOUSE_ENTER, MOUSE_LEAVE, CLICK } from "../../constants/events.js";
 
 export class NodeMenu {
   #html = undefined;
   #selectedNode = undefined;
-  constructor() {
+  constructor(createNodeMenuElem) {
     this.#html = createNodeMenuElem();
     this.#attachHandlers();
-    this.#showAddButtons();
   }
 
   setSelected(node) {
@@ -39,7 +37,6 @@ export class NodeMenu {
 
   show() {
     const { menuElem } = this.getElements();
-    this.#showAddButtons();
     menuElem.style.opacity = "1";
   }
 
@@ -73,33 +70,5 @@ export class NodeMenu {
       this.setY(0);
       cb?.();
     });
-  }
-
-  setClickLeft(cb) {
-    const { leftButtonElem } = this.getElements();
-    leftButtonElem.addEventListener(CLICK, () => {
-      this.hide();
-      this.setX(0);
-      this.setY(0);
-      cb?.();
-    });
-  }
-
-  setClickRight(cb) {
-    const { rightButtonElem } = this.getElements();
-    rightButtonElem.addEventListener(CLICK, () => {
-      this.hide();
-      this.setX(0);
-      this.setY(0);
-      cb?.();
-    });
-  }
-
-  #showAddButtons() {
-    const { rightButtonElem, leftButtonElem } = this.getElements();
-    rightButtonElem.style.opacity =
-      this.#selectedNode?.getRight() !== undefined ? 0 : 1;
-    leftButtonElem.style.opacity =
-      this.#selectedNode?.getLeft() !== undefined ? 0 : 1;
   }
 }

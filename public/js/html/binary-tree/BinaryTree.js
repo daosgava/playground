@@ -1,5 +1,5 @@
 import { TreeGeneric } from "../TreeGeneric.js";
-import { NodeMenu } from "../menu/NodeMenu.js";
+import { BinaryNodeMenu } from "../menu/BinaryNodeMenu.js";
 import { BinaryNode } from "../../structures/BinaryNode.js";
 
 export class BinaryTree extends TreeGeneric {
@@ -9,7 +9,7 @@ export class BinaryTree extends TreeGeneric {
   }
 
   #initNodeMenu() {
-    const nodeMenu = new NodeMenu();
+    const nodeMenu = new BinaryNodeMenu();
     nodeMenu.setClickDelete(() => {
       this.delete(this.root, nodeMenu.getSelected().id);
       this.resetTree();
