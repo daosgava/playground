@@ -1,5 +1,5 @@
-import { TreeNode } from "./structures/TreeNode.js";
-import { NaryTreeNode } from "./structures/NaryTreeNode.js";
+import { BinaryNode } from "./structures/BinaryNode.js";
+import { NaryNode } from "./structures/NaryNode.js";
 import { Tree } from "./html/binary-tree/Tree.js";
 import { NaryTree } from "./html/nary-tree/NaryTree.js";
 import { OpMenu } from "./html/menu/OpMenu.js";
@@ -22,26 +22,26 @@ const initializeBinaryTree = () => {
   treeContainer.appendChild(title);
   appContainer.appendChild(treeContainer);
 
-  const root = new TreeNode(1);
+  const root = new BinaryNode(1);
 
   // Tree Nodes
-  const a = new TreeNode(2);
-  const b = new TreeNode(3);
+  const a = new BinaryNode(2);
+  const b = new BinaryNode(3);
   root.setLeft(a);
   root.setRight(b);
 
-  const c = new TreeNode(4);
-  const d = new TreeNode(5);
+  const c = new BinaryNode(4);
+  const d = new BinaryNode(5);
   a.setLeft(c);
   a.setRight(d);
 
-  const f = new TreeNode(6);
-  const g = new TreeNode(7);
+  const f = new BinaryNode(6);
+  const g = new BinaryNode(7);
   b.setLeft(f);
   b.setRight(g);
 
-  const h = new TreeNode(8);
-  const i = new TreeNode(9);
+  const h = new BinaryNode(8);
+  const i = new BinaryNode(9);
   f.setLeft(h);
   f.setRight(i);
 
@@ -71,26 +71,26 @@ const initializeNaryTree = () => {
   naryTreeContainer.appendChild(title);
   appContainer.appendChild(naryTreeContainer);
 
-  const root = new NaryTreeNode(1);
+  const root = new NaryNode(1);
 
-  const a = new NaryTreeNode(2);
-  const b = new NaryTreeNode(3);
-  const c = new NaryTreeNode(4);
+  const a = new NaryNode(2);
+  const b = new NaryNode(3);
+  const c = new NaryNode(4);
   root.addChild(a);
   root.addChild(b);
   root.addChild(c);
 
-  const d = new NaryTreeNode(5);
-  const e = new NaryTreeNode(6);
+  const d = new NaryNode(5);
+  const e = new NaryNode(6);
   a.addChild(d);
   a.addChild(e);
 
-  const f = new NaryTreeNode(7);
-  const g = new NaryTreeNode(8);
+  const f = new NaryNode(7);
+  const g = new NaryNode(8);
   d.addChild(f);
   d.addChild(g);
 
-  const h = new NaryTreeNode(9);
+  const h = new NaryNode(9);
   g.addChild(h);
 
   const naryTree = new NaryTree(root, naryTreeContainer);

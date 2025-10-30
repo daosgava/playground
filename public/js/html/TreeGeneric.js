@@ -33,22 +33,18 @@ export class TreeGeneric {
 
   #connectNodes(root, children) {
     if (children.length === 0) return;
+    const { treeElem } = this.getElements();
 
-    const rootLimb = Connector.createLimb(root, true);
-    this.container.appendChild(rootLimb);
+    const isUpward = true;
+    const rootLimb = Connector.createLimb(root, isUpward);
+    treeElem.appendChild(rootLimb);
 
     const connector = new Connector(children);
     const { hLine, limbs } = connector.getElements();
 
-    if (hLine) this.container.appendChild(hLine);
+    if (hLine) treeElem.appendChild(hLine);
 
-    limbs.forEach((limb) => this.container.appendChild(limb));
-  }
-
-  #attachMenu(node) {
-    if (this.nodeMenu) {
-      node.setMenu(this.nodeMenu);
-    }
+    limbs.forEach((limb) => treeElem.appendChild(limb));
   }
 
   // Based on Breadth-First
@@ -66,13 +62,15 @@ export class TreeGeneric {
       const { childrenContainerElem: parentContainer } = subTree.getElements();
 
       const rootNode = subTree.getRoot();
+      if (this.nodeMenu) {
+        rootNode.attachToMenu(this.nodeMenu);
+      }
 
       const children = rootNode
         .getModel()
         .getChildren()
         .map((child) => {
           const subTree = new SubTree(child);
-
           const { subTreeElem } = subTree.getElements();
           parentContainer.appendChild(subTreeElem);
 
@@ -156,6 +154,21 @@ export class TreeGeneric {
 
     for (const child of [...children]) {
       this.invertTree(child, true);
+    }
+  }
+
+  delete(node, target) {
+    if (node.getChildren().length === 0) return;
+
+    for (const child of node.getChildren()) {
+      if (child.id === target) {
+        node.deleteChild(target);
+        return;
+      }
+    }
+
+    for (const child of node.getChildren()) {
+      this.delete(child, target);
     }
   }
 }

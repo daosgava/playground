@@ -13,6 +13,10 @@ export class SubTree {
     return this.#rootNode;
   }
 
+  deleteRoot() {
+    this.#rootNode = undefined;
+  }
+
   #createSubtreeElem() {
     const hasChildren = this.getRoot().getModel().getChildren().length > 0;
     const { subTreeElem, rootElem, childrenContainerElem } =

@@ -23,34 +23,12 @@ export class Node {
     this.#attachHandlers();
   }
 
-  setMenu(nodeMenu) {
-    this.nodeMenu = nodeMenu;
-    this.#attachMenu();
-  }
-
   getElements() {
     return this.#html;
   }
 
   #attachHandlers() {
     this.#editHandler();
-  }
-
-  #attachMenu() {
-    const { nodeElem } = this.getElements();
-
-    nodeElem.addEventListener(MOUSE_ENTER, () => {
-      const { top, left } = nodeElem.getBoundingClientRect();
-
-      this.nodeMenu.setSelected(this.#model);
-      this.nodeMenu.setY(top);
-      this.nodeMenu.setX(left);
-      this.nodeMenu.show();
-    });
-
-    nodeElem.addEventListener(MOUSE_LEAVE, () => {
-      this.nodeMenu.hide();
-    });
   }
 
   #editHandler() {
@@ -66,5 +44,27 @@ export class Node {
 
   #editNode(newVal) {
     this.#model.value = newVal;
+  }
+
+  attachToMenu(nodeMenu) {
+    this.nodeMenu = nodeMenu;
+    this.#attachEvents();
+  }
+
+  #attachEvents() {
+    const { nodeElem } = this.getElements();
+
+    nodeElem.addEventListener(MOUSE_ENTER, () => {
+      const { top, left } = nodeElem.getBoundingClientRect();
+
+      this.nodeMenu.setSelected(this.#model);
+      this.nodeMenu.setY(top);
+      this.nodeMenu.setX(left);
+      this.nodeMenu.show();
+    });
+
+    nodeElem.addEventListener(MOUSE_LEAVE, () => {
+      this.nodeMenu.hide();
+    });
   }
 }

@@ -1,6 +1,5 @@
 import { createNodeMenuElem } from "../../helpers/element-factory/nodeMenu.js";
 import { MOUSE_ENTER, MOUSE_LEAVE, CLICK } from "../../constants/events.js";
-import { TreeNode } from "../../structures/TreeNode.js";
 
 export class NodeMenu {
   #html = undefined;
@@ -13,6 +12,10 @@ export class NodeMenu {
 
   setSelected(node) {
     this.#selectedNode = node;
+  }
+
+  getSelected() {
+    return this.#selectedNode;
   }
 
   getElements() {
@@ -65,7 +68,9 @@ export class NodeMenu {
   setClickDelete(cb) {
     const { deleteButtonElem } = this.getElements();
     deleteButtonElem.addEventListener(CLICK, () => {
-      this.#selectedNode.value = undefined;
+      this.hide();
+      this.setX(0);
+      this.setY(0);
       cb?.();
     });
   }
@@ -73,16 +78,20 @@ export class NodeMenu {
   setClickLeft(cb) {
     const { leftButtonElem } = this.getElements();
     leftButtonElem.addEventListener(CLICK, () => {
-      this.#selectedNode.left = new TreeNode("");
-      cb?.(this.#selectedNode.left);
+      this.hide();
+      this.setX(0);
+      this.setY(0);
+      cb?.();
     });
   }
 
   setClickRight(cb) {
     const { rightButtonElem } = this.getElements();
     rightButtonElem.addEventListener(CLICK, () => {
-      this.#selectedNode.right = new TreeNode("");
-      cb?.(this.#selectedNode.right);
+      this.hide();
+      this.setX(0);
+      this.setY(0);
+      cb?.();
     });
   }
 

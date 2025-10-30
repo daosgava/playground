@@ -2,8 +2,9 @@
     display: flex;
     height: fit-content;
     gap: 0.5rem;
-    transform: translate(0, 2.8rem);
+    transform: translate(-0.35rem, 2rem);
     opacity: 0;
+    padding: 0.5rem;
     position: absolute;
     z-index: 20;
 
@@ -20,7 +21,7 @@
         }
 
         .arrow {
-            border: var(--branch-border);
+            border: var(--dark-border);
             border-bottom: none;
             width: 0.5rem;
         }
