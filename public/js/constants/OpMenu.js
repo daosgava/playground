@@ -13,3 +13,5 @@ export const OPTIONS = [
   { id: BFS_ID, value: BFS_ID, text: BFS_LABEL },
   { id: INVERT_ID, value: INVERT_ID, text: INVERT_LABEL },
 ];
+
+export const ENTER_CODE = "Enter";

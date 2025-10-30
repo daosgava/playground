@@ -17,11 +17,19 @@ export const createHtmlElem = ({ tag, classes, id, innerText, value }) => {
   return elem;
 };
 
-export const createInputElem = ({ classes, id, value, placeholder }) => {
+export const createInputElem = ({
+  classes,
+  id,
+  value,
+  placeholder,
+  required,
+}) => {
   const inputElem = createHtmlElem({ tag: "input", classes, id });
 
   inputElem.value = value;
   inputElem.placeholder = placeholder;
+
+  if (required) inputElem.required = true;
 
   return inputElem;
 };

@@ -5,6 +5,7 @@ import {
   INVERT_ID,
   INVERT_ICON,
   SEARCH_ICON,
+  ENTER_CODE,
 } from "../../constants/OpMenu.js";
 
 export class OpMenu {
@@ -43,7 +44,8 @@ export class OpMenu {
 
   #handleClickButton() {
     const { buttonElem, inputElem } = this.getElements();
-    buttonElem.addEventListener("click", () => {
+
+    const runOp = () =>
       this.#treeInstances.forEach((tree) => {
         tree.resetTree();
         if (this.#operation === DFS_ID) {
@@ -54,6 +56,11 @@ export class OpMenu {
           tree.invert();
         }
       });
+
+    inputElem.addEventListener("keydown", (e) => {
+      if (e.code === ENTER_CODE) runOp();
     });
+
+    buttonElem.addEventListener("click", () => runOp());
   }
 }
