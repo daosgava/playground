@@ -98,8 +98,8 @@ export class NodeMenu {
   #showAddButtons() {
     const { rightButtonElem, leftButtonElem } = this.getElements();
     rightButtonElem.style.opacity =
-      this.#selectedNode?.right?.value !== undefined ? 0 : 1;
+      this.#selectedNode?.getRight() !== undefined ? 0 : 1;
     leftButtonElem.style.opacity =
-      this.#selectedNode?.left?.value !== undefined ? 0 : 1;
+      this.#selectedNode?.getLeft() !== undefined ? 0 : 1;
   }
 }
