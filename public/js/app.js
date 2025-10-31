@@ -1,7 +1,9 @@
 import { BinaryNode } from "./structures/BinaryNode.js";
 import { NaryNode } from "./structures/NaryNode.js";
+import { FCNSNode } from "./structures/FCNSNode.js";
 import { BinaryTree } from "./html/binary-tree/BinaryTree.js";
 import { NaryTree } from "./html/nary-tree/NaryTree.js";
+import { FCNSTree } from "./html/fcns-tree/FCNSTree.js";
 import { OpMenu } from "./html/menu/OpMenu.js";
 import { APP_ID } from "./constants/app.js";
 import { createHtmlElem } from "./helpers/element-factory/generic.js";
@@ -99,9 +101,64 @@ const initializeNaryTree = () => {
   return naryTree;
 };
 
+const initializeFCNSTree = () => {
+  const naryTreeContainer = createHtmlElem({
+    tag: "div",
+    id: "fcns-tree-container",
+    classes: ["tree-container"],
+  });
+  const title = createHtmlElem({
+    tag: "h3",
+    classes: ["title"],
+    innerText: "FCNS Tree",
+  });
+  naryTreeContainer.appendChild(title);
+  appContainer.appendChild(naryTreeContainer);
+
+  const root = new FCNSNode("R");
+
+  const a = new FCNSNode("A");
+  const b = new FCNSNode("B");
+  const c = new FCNSNode("C");
+  const d = new FCNSNode("D");
+  const e = new FCNSNode("E");
+  const f = new FCNSNode("F");
+  const g = new FCNSNode("G");
+  const h = new FCNSNode("H");
+  const i = new FCNSNode("I");
+  const j = new FCNSNode("J");
+  const k = new FCNSNode("K");
+  const l = new FCNSNode("L");
+
+  root.setFirstChild(a);
+
+  console.log(root.value);
+
+  a.setNextSibling(b);
+  b.setNextSibling(c);
+  c.setNextSibling(d);
+
+  c.setFirstChild(j);
+  j.setFirstChild(k);
+  k.setNextSibling(l);
+
+  a.setFirstChild(e);
+  e.setNextSibling(f);
+
+  e.setFirstChild(g);
+  g.setNextSibling(h);
+  g.setNextSibling(i);
+
+  const fcnsTree = new FCNSTree(root, naryTreeContainer);
+  fcnsTree.draw();
+
+  return fcnsTree;
+};
+
 const app = () => {
   const binaryTreeInstance = initializeBinaryTree();
   const naryTreeInstance = initializeNaryTree();
+  const fcnsTreeInstace = initializeFCNSTree();
   initializeOpMenu([binaryTreeInstance, naryTreeInstance]);
 };
 
