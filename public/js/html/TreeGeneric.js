@@ -31,7 +31,7 @@ export class TreeGeneric {
     this.container.appendChild(treeElem);
   }
 
-  #connectNodes(root, children) {
+  connectNodes(root, children) {
     if (children.length === 0) return;
     const { treeElem } = this.getElements();
 
@@ -78,7 +78,7 @@ export class TreeGeneric {
           return subTree;
         });
 
-      this.#connectNodes(subTree, children);
+      this.connectNodes(subTree, children);
 
       queue.push(...children);
     }

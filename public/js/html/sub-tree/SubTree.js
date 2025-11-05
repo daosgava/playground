@@ -1,5 +1,6 @@
-import { createSubNaryTreeElem } from "../../helpers/element-factory/naryTree.js";
+import { createSubTreeElem } from "../../helpers/element-factory/naryTree.js";
 import { Node } from "../tree-node/Node.js";
+import { FCNSNode } from "../../structures/FCNSNode.js";
 
 export class SubTree {
   #rootNode = undefined;
@@ -13,14 +14,15 @@ export class SubTree {
     return this.#rootNode;
   }
 
-  deleteRoot() {
-    this.#rootNode = undefined;
-  }
-
   #createSubtreeElem() {
-    const hasChildren = this.getRoot().getModel().getChildren().length > 0;
+    const root = this.getRoot().getModel();
+    const hasChildren =
+      root instanceof FCNSNode
+        ? root.getFirstChild()
+        : root.getChildren().length > 0;
+
     const { subTreeElem, rootElem, childrenContainerElem } =
-      createSubNaryTreeElem(hasChildren);
+      createSubTreeElem(hasChildren);
     const { nodeElem } = this.#rootNode.getElements();
     rootElem.appendChild(nodeElem);
 

@@ -115,6 +115,7 @@ const initializeFCNSTree = () => {
   naryTreeContainer.appendChild(title);
   appContainer.appendChild(naryTreeContainer);
 
+  // TODO - Let create a parser and convert this node to an array or nodes
   const root = new FCNSNode("R");
 
   const a = new FCNSNode("A");
@@ -131,8 +132,6 @@ const initializeFCNSTree = () => {
   const l = new FCNSNode("L");
 
   root.setFirstChild(a);
-
-  console.log(root.value);
 
   a.setNextSibling(b);
   b.setNextSibling(c);

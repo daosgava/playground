@@ -1,6 +1,6 @@
 import { createHtmlElem } from "./tree.js";
 
-export const createSubNaryTreeElem = (hasChildren) => {
+export const createSubTreeElem = (hasChildren) => {
   const subTreeElem = createHtmlElem({
     tag: "div",
     classes: ["node-container"],

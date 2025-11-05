@@ -3,6 +3,7 @@ export class FCNSNode {
   #firstChild = null;
   #nextSibling = null;
   constructor(value) {
+    this.id = window.crypto.randomUUID();
     this.value = value;
   }
 
@@ -17,6 +18,7 @@ export class FCNSNode {
   getFirstChild() {
     return this.#firstChild;
   }
+
   getNextSibling() {
     return this.#nextSibling;
   }
