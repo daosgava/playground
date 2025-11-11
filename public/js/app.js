@@ -158,6 +158,9 @@ const app = () => {
   const binaryTreeInstance = initializeBinaryTree();
   const naryTreeInstance = initializeNaryTree();
   const fcnsTreeInstace = initializeFCNSTree();
+  const p = "R";
+  const n = 3;
+  fcnsTreeInstace.kthChild(fcnsTreeInstace.root, p, n);
   initializeOpMenu([binaryTreeInstance, naryTreeInstance]);
 };
 

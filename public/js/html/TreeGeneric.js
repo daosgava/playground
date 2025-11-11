@@ -133,6 +133,7 @@ export class TreeGeneric {
 
   invert() {
     this.invertTree();
+    console.log(this.root);
     this.resetTree();
   }
 
